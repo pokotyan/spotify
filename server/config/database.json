@@ -1,0 +1,7 @@
+{
+  "dialect": "mysql",
+  "database": "boiler-plate",
+  "username": "root",
+  "password": "",
+  "port": 3306
+}
