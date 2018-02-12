@@ -2,7 +2,7 @@ module.exports = {
   // メインとなるJavaScriptファイル（エントリーポイント）
   entry: [
     'babel-polyfill', // Polyfillも含める
-    './src/main.js',
+    './src/index.js',
   ],
   // ファイルの出力設定
   output: {
