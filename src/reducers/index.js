@@ -5,7 +5,7 @@ function about(state = {value: 0}, action) {
   switch (action.type) {
     case INCREMENT:
       return Object.assign({}, state, {
-        value: state.value + 1,
+        value: action.payload,
       });
     default:
       return state;
