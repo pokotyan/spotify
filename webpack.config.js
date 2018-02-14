@@ -12,6 +12,9 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
+    loaders: [
+      { test: /\.json$/, loader: 'json-loader' }
+    ],
     rules: [
       {
         // 拡張子 .js の場合
@@ -37,6 +40,13 @@ module.exports = {
         exclude: /node_modules/,
       }
     ],
+  },
+  // requestやrequest-promise使う際に必要な設定 https://github.com/request/request/issues/1529
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   },
   // ソースマップを有効にする
   devtool: 'source-map',
