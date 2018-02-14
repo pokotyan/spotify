@@ -1,4 +1,4 @@
-const tableName = 'drinks';
+const tableName = 'increments';
 
 module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable(
@@ -9,11 +9,9 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true
       },
-      name: {
-        type: Sequelize.STRING,
-      },
-      maker: {
-        type: Sequelize.STRING,
+      count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       created_at: {
         type: Sequelize.DATE
