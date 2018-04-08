@@ -1,19 +1,10 @@
 import { combineReducers } from 'redux';
-import { INCREMENT } from '../actions/about';
-
-function about(state = {value: 0}, action) {
-  switch (action.type) {
-    case INCREMENT:
-      return Object.assign({}, state, {
-        value: action.payload,
-      });
-    default:
-      return state;
-  }
-}
+import about from './about';
+import pokemon from './pokemon';
 
 const reducer = combineReducers({
   about,
+  pokemon,
 });
 
 export default reducer;

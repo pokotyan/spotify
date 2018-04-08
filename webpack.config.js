@@ -1,3 +1,6 @@
+// const path = require('path');
+// const browserPlugin = require('webpack-browser-plugin');
+
 module.exports = {
   // メインとなるJavaScriptファイル（エントリーポイント）
   entry: [
@@ -55,5 +58,24 @@ module.exports = {
   devServer: {
     contentBase: 'build',
     port: 8081
+    // headers: {
+    //   "Access-Control-Allow-Origin": "*",
+    // },
+    // proxy: {
+    //   '**': 'http://localhost:9000',
+    //   pathRewrite: { '^/api': '' },
+    //   changeOrigin: true,
+    //   secure: false
+    // }
+    // proxy:{
+    //   '/api/**' : {
+    //     target: 'http://localhost:9000/', 
+    //     changeOrigin: true,
+    //     secure: false,
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   }
+    // }
   },
 };
