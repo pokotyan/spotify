@@ -1,7 +1,7 @@
 import React from 'react';
 import { Router, Route } from 'react-router';
 import About from './container/About';
-import Home from './components/Home';
+import Home from './container/Home';
 import Pokemon from './container/Pokemon';
 import NotFound from './components/NotFound';
 
