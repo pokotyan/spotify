@@ -57,16 +57,13 @@ module.exports = {
   // ブラウザで http://localhost:8081/ でアクセスできるようになる
   devServer: {
     contentBase: 'build',
-    port: 8081
-    // headers: {
-    //   "Access-Control-Allow-Origin": "*",
-    // },
-    // proxy: {
-    //   '**': 'http://localhost:9000',
-    //   pathRewrite: { '^/api': '' },
-    //   changeOrigin: true,
-    //   secure: false
-    // }
+    port: 8081,
+    proxy: {
+      '**': 'http://localhost:9000',
+      pathRewrite: { '^/api': '' },
+      changeOrigin: true,
+      secure: false,
+    },
     // proxy:{
     //   '/api/**' : {
     //     target: 'http://localhost:9000/', 
