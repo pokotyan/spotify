@@ -1,11 +1,10 @@
 import rp from 'request-promise';
-import { 
+import {
   put,
-  call,
   take,
   all,
   fork,
-  select
+  select,
 } from 'redux-saga/effects';
 import {
   GET,
@@ -13,7 +12,7 @@ import {
   CORRECT,
   correct,
   UN_CORRECT,
-  unCorrect
+  unCorrect,
 } from '../actions/pokemon';
 
 function* getAsync() {
@@ -35,9 +34,9 @@ function* getAsync() {
 function* quizCorrectSync() {
   for (;;) {
     yield take(CORRECT);
-    const state = yield select();　
+    const state = yield select();
     console.log(state);
-    yield put(correct({correct: true}));
+    yield put(correct({ correct: true }));
 
     continue;
   }
@@ -46,9 +45,10 @@ function* quizCorrectSync() {
 function* quizUnCorrectSync() {
   for (;;) {
     yield take(UN_CORRECT);
-    const state = yield select();　
+    const state = yield select();
     console.log(state);
-    yield put(unCorrect({correct: false}));
+
+    yield put(unCorrect({ correct: false }));
 
     continue;
   }

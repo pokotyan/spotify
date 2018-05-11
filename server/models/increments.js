@@ -5,20 +5,20 @@ module.exports = (sequelize, DataTypes) => {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
-      autoIncrement: true
+      autoIncrement: true,
     },
     count: {
       type: DataTypes.INTEGER,
-      defaultValue: 0
+      defaultValue: 0,
     },
     created_at: {
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     updated_at: {
-      type: DataTypes.DATE
-    }
+      type: DataTypes.DATE,
+    },
   }, {
-    underscored: true
+    underscored: true,
   });
   return table;
 };

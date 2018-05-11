@@ -3,8 +3,8 @@ import { GET, CORRECT, UN_CORRECT } from '../actions/pokemon';
 const initialState = {
   pokemon: {
     quiz: null,
-    name: null
-  }
+    name: null,
+  },
 };
 
 function pokemon(state = initialState, action) {

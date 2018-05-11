@@ -22,7 +22,7 @@ class GetPokemon extends Component {
 }
 GetPokemon.propTypes = {
   get: PropTypes.func.isRequired,
-  pokemon: PropTypes.object.isRequired
+  pokemon: PropTypes.object.isRequired,
 };
 
 export default GetPokemon;

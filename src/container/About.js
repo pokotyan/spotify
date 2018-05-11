@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -11,7 +11,7 @@ class About extends Component {
       aboutActions: {
         increment,
       },
-      about
+      about,
     } = this.props;
 
     return (
@@ -19,22 +19,25 @@ class About extends Component {
         <h2>About</h2>
         <p>aboutページです</p>
         <Increment
-          increment={increment} 
-          about={about}        
+          increment={increment}
+          about={about}
         />
       </div>
-    )
+    );
   }
 }
+
 About.propTypes = {
   aboutActions: PropTypes.object.isRequired,
   about: PropTypes.object,
 };
+
 function mapStateToProps(state) {
   return {
     about: state.about,
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     aboutActions: {
@@ -42,9 +45,10 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
+
 const AboutContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(About);
 
 export default AboutContainer;

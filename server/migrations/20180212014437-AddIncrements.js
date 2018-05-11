@@ -7,20 +7,20 @@ module.exports = {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
-        autoIncrement: true
+        autoIncrement: true,
       },
       count: {
         type: Sequelize.INTEGER,
-        defaultValue: 0
+        defaultValue: 0,
       },
       created_at: {
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
-        type: Sequelize.DATE
-      }
-    }
+        type: Sequelize.DATE,
+      },
+    },
   ),
 
-  down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName)
+  down: (queryInterface, Sequelize) => queryInterface.dropTable(tableName),
 };

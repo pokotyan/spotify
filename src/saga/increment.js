@@ -1,10 +1,9 @@
 import rp from 'request-promise';
-import { 
+import {
   put,
-  call,
   take,
   all,
-  fork
+  fork,
 } from 'redux-saga/effects';
 import {
   INCREMENT,

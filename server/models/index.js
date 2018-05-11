@@ -1,21 +1,20 @@
-let fs = require('fs');
-let path = require('path');
-let Sequelize = require('sequelize');
-let lodash = require('lodash');
-let config = require('../config/database.json');
-let db = {};
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const lodash = require('lodash');
+const config = require('../config/database.json');
 
-let sequelize = new Sequelize('boiler-plate', config.username, config.password ,{
-    host: 'localhost',
-    dialect: 'mysql',
-    port: 3306,
-    omitNull: true
+const db = {};
+
+const sequelize = new Sequelize('boiler-plate', config.username, config.password, {
+  host: 'localhost',
+  dialect: 'mysql',
+  port: 3306,
+  omitNull: true,
 });
 
-fs.readdirSync(__dirname).filter((file) => {
-  return (file.indexOf('.') !== 0) && (file !== 'index.js');
-}).forEach((file) => {
-  var model = sequelize.import(path.join(__dirname, file));
+fs.readdirSync(__dirname).filter(file => (file.indexOf('.') !== 0) && (file !== 'index.js')).forEach((file) => {
+  const model = sequelize.import(path.join(__dirname, file));
   db[model.name] = model;
 });
 
@@ -26,6 +25,6 @@ Object.keys(db).forEach((modelName) => {
 });
 
 module.exports = lodash.extend({
-  sequelize: sequelize,
-  Sequelize: Sequelize
+  sequelize,
+  Sequelize,
 }, db);

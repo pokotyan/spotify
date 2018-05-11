@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 
 class SpotifyLogin extends Component {
@@ -14,7 +13,6 @@ class SpotifyLogin extends Component {
       >
         spotify
       </a>
-      // <button onClick={() => auth()}>spotify</button>
     );
   }
 }

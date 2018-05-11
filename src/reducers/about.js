@@ -1,6 +1,6 @@
 import { INCREMENT } from '../actions/about';
 
-const initialState = {value: 0};
+const initialState = { value: 0 };
 
 function about(state = initialState, action) {
   switch (action.type) {

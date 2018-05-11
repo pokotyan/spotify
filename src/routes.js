@@ -13,7 +13,7 @@ const Routes = (props) => {
       <Route path="/pokemon" component={Pokemon} />
       <Route path="*" component={NotFound} />
     </Router>
-  )
+  );
 };
 
 export default Routes;

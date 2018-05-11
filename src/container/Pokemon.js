@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,9 +12,9 @@ class Pokemon extends Component {
       pokemonActions: {
         get,
         correct,
-        unCorrect
+        unCorrect,
       },
-      pokemon
+      pokemon,
     } = this.props;
 
     return (
@@ -22,27 +22,29 @@ class Pokemon extends Component {
         <h2>Pokemon</h2>
         <p>getだぜ</p>
         <GetPokemon
-          get={get} 
+          get={get}
           pokemon={pokemon}
         />
         <QuizPokemon
           correct={correct}
-          unCorrect={unCorrect}          
+          unCorrect={unCorrect}
           pokemon={pokemon}
         />
       </div>
-    )
+    );
   }
 }
 Pokemon.propTypes = {
   pokemonActions: PropTypes.object.isRequired,
   pokemon: PropTypes.object,
 };
+
 function mapStateToProps(state) {
   return {
     pokemon: state.pokemon,
   };
 }
+
 function mapDispatchToProps(dispatch) {
   return {
     pokemonActions: {
@@ -50,9 +52,10 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
+
 const PokemonContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Pokemon);
 
 export default PokemonContainer;

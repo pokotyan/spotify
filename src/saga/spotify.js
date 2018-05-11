@@ -1,11 +1,9 @@
 import rp from 'request-promise';
-import { 
+import {
   put,
-  call,
   take,
   all,
   fork,
-  select
 } from 'redux-saga/effects';
 import {
   AUTH,

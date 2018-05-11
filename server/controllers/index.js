@@ -1,7 +1,6 @@
-let glob = require('glob');
-let controllers = glob.sync(`${__dirname}/*.js`);
-let express = require('express');
-let router = express.Router();
+const glob = require('glob');
+
+const controllers = glob.sync(`${__dirname}/*.js`);
 
 module.exports = (app) => {
   controllers.forEach((controller) => {
