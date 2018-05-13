@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-// import { withRouter } from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import * as spotifyActions from '../actions/spotify';
 
 class SpotifyCallBack extends Component {
@@ -19,6 +19,8 @@ class SpotifyCallBack extends Component {
     } = this.props;
 
     await fetchToken(code);
+
+    browserHistory.push('/');
   }
 
   render() {
