@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router';
 import * as spotifyActions from '../actions/spotify';
 
 class SpotifyCallBack extends Component {
-  async componentDidMount() {
+  async componentWillMount() {
     const {
       spotifyActions: {
         fetchToken,
@@ -20,7 +20,7 @@ class SpotifyCallBack extends Component {
 
     await fetchToken(code);
 
-    browserHistory.push('/');
+    browserHistory.push('/home');
   }
 
   render() {

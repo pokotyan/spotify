@@ -10,6 +10,8 @@ import {
   auth,
   FETCH_TOKEN,
   setToken,
+  FETCH_DEVICE,
+  fetchDevice,
 } from '../actions/spotify';
 
 function* authAsync() {
@@ -46,9 +48,31 @@ function* fetchTokenAsync() {
   }
 }
 
+function* fetchDeviceAsync() {
+  for (;;) {
+    const action = yield take(FETCH_DEVICE);
+
+    const accessToken = action.payload;
+
+    const result = yield rp({
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      uri: 'https://api.spotify.com/v1/me/player/devices',
+      json: true,
+    });
+
+    yield put(fetchDevice(result));
+
+    continue;
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     fork(authAsync),
     fork(fetchTokenAsync),
+    fork(fetchDeviceAsync),
   ]);
 }

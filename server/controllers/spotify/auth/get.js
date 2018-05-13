@@ -12,7 +12,7 @@ module.exports = async (req, res, next) => {
     querystring.stringify({
       response_type: 'code',
       client_id: clientId,
-      // scope: scope,
+      scope: 'user-read-playback-state',
       redirect_uri: redirectUri,
       // state: state
     })}`);
