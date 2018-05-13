@@ -3,7 +3,7 @@ const querystring = require('querystring');
 
 const clientId = 'e9ff433139b84602b251d4cb5d4e40b2';
 // client_secret: config.client_secret,
-const redirectUri = 'http://localhost:8081/callback/';
+const redirectUri = 'http://localhost:8081/callback';
 
 module.exports = async (req, res, next) => {
   // const result = await auth.requestAuth().catch(e => console.log(e));

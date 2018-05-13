@@ -8,13 +8,15 @@ import {
 import {
   AUTH,
   auth,
+  FETCH_TOKEN,
+  setToken,
 } from '../actions/spotify';
 
 function* authAsync() {
   for (;;) {
     yield take(AUTH);
 
-    const result = yield rp({
+    yield rp({
       method: 'GET',
       uri: 'http://localhost:9000/api/spotify/auth',
       json: true,
@@ -26,8 +28,27 @@ function* authAsync() {
   }
 }
 
+function* fetchTokenAsync() {
+  for (;;) {
+    const action = yield take(FETCH_TOKEN);
+
+    const code = action.payload;
+
+    const result = yield rp({
+      method: 'GET',
+      uri: `http://localhost:9000/api/spotify/token/${code}`,
+      json: true,
+    });
+
+    yield put(setToken(result));
+
+    continue;
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     fork(authAsync),
+    fork(fetchTokenAsync),
   ]);
 }
