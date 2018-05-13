@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import SpotifyLogin from '../components/SpotifyLogin';
 import * as spotifyActions from '../actions/spotify';
 
-class Home extends Component {
+class Top extends Component {
   render() {
     const {
       spotifyActions: {
@@ -15,8 +15,7 @@ class Home extends Component {
 
     return (
       <div>
-        <h2>Home</h2>
-        <p>Welcome to ようこそ</p>
+        <h2>Top</h2>
         <SpotifyLogin
           auth={auth}
         />
@@ -24,7 +23,7 @@ class Home extends Component {
     );
   }
 }
-Home.propTypes = {
+Top.propTypes = {
   spotifyActions: PropTypes.object.isRequired,
 };
 function mapStateToProps(state) {
@@ -39,6 +38,6 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-const HomeContainer = connect(mapStateToProps, mapDispatchToProps)(Home);
+const TopContainer = connect(mapStateToProps, mapDispatchToProps)(Top);
 
-export default HomeContainer;
+export default TopContainer;
