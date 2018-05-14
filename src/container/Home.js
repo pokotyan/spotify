@@ -15,7 +15,7 @@ class Home extends Component {
   //     },
   //     spotify: {
   //       auth: {
-  //         access_token: accessToken,
+  //         accessToken,
   //       },
   //     },
   //   } = nextProps;
@@ -30,7 +30,7 @@ class Home extends Component {
   //     },
   //     spotify: {
   //       auth: {
-  //         access_token: accessToken,
+  //         accessToken,
   //       },
   //     },
   //   } = nextProps;
@@ -47,7 +47,7 @@ class Home extends Component {
       },
       // spotify: {
       //   auth: {
-      //     access_token: accessToken,
+      //     accessToken,
       //   },
       // },
     } = this.props;
@@ -55,10 +55,10 @@ class Home extends Component {
     return (
       <div>
         <h2>Home</h2>
-        {this.props.spotify.auth.access_token &&
+        {this.props.spotify.auth.accessToken &&
           <GetDevice
             fetchDevice={fetchDevice}
-            accessToken={this.props.spotify.auth.access_token}
+            accessToken={this.props.spotify.auth.accessToken}
           />
         }
       </div>
