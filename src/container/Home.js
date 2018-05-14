@@ -59,6 +59,7 @@ class Home extends Component {
           <GetDevice
             fetchDevice={fetchDevice}
             accessToken={this.props.spotify.auth.accessToken}
+            refreshToken={this.props.spotify.auth.refreshToken}
           />
         }
       </div>

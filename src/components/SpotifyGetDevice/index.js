@@ -6,12 +6,11 @@ class SpotifyGetDevice extends Component {
     const {
       fetchDevice,
       accessToken,
+      refreshToken,
     } = this.props;
 
     return (
-      <div>
-        <button onClick={() => fetchDevice(accessToken)}>get Device</button>
-      </div>
+      <button onClick={() => fetchDevice({ accessToken, refreshToken })}>get Device</button>
     );
   }
 }

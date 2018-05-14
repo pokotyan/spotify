@@ -1,4 +1,4 @@
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["_refreshAccessToken"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["_refreshAccessToken", "_updateAccessToken"] }] */
 
 const querystring = require('querystring');
 const rp = require('request-promise');
@@ -59,9 +59,20 @@ class Spotify {
       json: true,
     });
 
+    await this._updateAccessToken({ accessToken, refreshToken });
+
     this.accessToken = accessToken;
 
     return accessToken;
+  }
+
+  async _updateAccessToken({ accessToken, refreshToken }) {
+    await db.users.update({
+      access_token: accessToken,
+      refresh_token: refreshToken,
+    }, {
+      where: { refresh_token: refreshToken },
+    });
   }
 
   async request({ method, uri }) {

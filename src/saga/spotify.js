@@ -51,15 +51,18 @@ function* fetchTokenAsync() {
 function* fetchDeviceAsync() {
   for (;;) {
     const action = yield take(FETCH_DEVICE);
-
-    const accessToken = action.payload;
+    const {
+      accessToken,
+      refreshToken,
+    } = action.payload;
 
     const result = yield rp({
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
+      method: 'POST',
+      uri: 'http://localhost:9000/api/device',
+      form: {
+        accessToken,
+        refreshToken,
       },
-      uri: 'https://api.spotify.com/v1/me/player/devices',
       json: true,
     });
 

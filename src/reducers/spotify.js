@@ -5,7 +5,7 @@ import {
 
 const initialState = {
   auth: {},
-  device: {},
+  device: [],
 };
 
 function pokemon(state = initialState, action) {
