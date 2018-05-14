@@ -36,13 +36,19 @@ function* fetchTokenAsync() {
 
     const code = action.payload;
 
-    const result = yield rp({
+    const {
+      accessToken,
+      refreshToken,
+    } = yield rp({
       method: 'GET',
       uri: `http://localhost:9000/api/spotify/token/${code}`,
       json: true,
     });
 
-    yield put(setToken(result));
+    yield put(setToken({
+      accessToken,
+      refreshToken,
+    }));
 
     continue;
   }
@@ -56,7 +62,10 @@ function* fetchDeviceAsync() {
       refreshToken,
     } = action.payload;
 
-    const result = yield rp({
+    const {
+      response,
+      latestToken,
+    } = yield rp({
       method: 'POST',
       uri: 'http://localhost:9000/api/device',
       form: {
@@ -66,7 +75,13 @@ function* fetchDeviceAsync() {
       json: true,
     });
 
-    yield put(fetchDevice(result));
+    // store内のトークンの最新化
+    yield put(setToken({
+      accessToken: latestToken.accessToken,
+      refreshToken: latestToken.refreshToken,
+    }));
+
+    yield put(fetchDevice(response));
 
     continue;
   }

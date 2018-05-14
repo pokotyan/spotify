@@ -78,13 +78,20 @@ class Spotify {
   async request({ method, uri }) {
     const accessToken = await this._refreshAccessToken(this.refreshToken);
 
-    return rp({
+    const response = await rp({
       method,
       uri,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       json: true,
+    });
+
+    return Object.assign({}, { response }, {
+      latestToken: {
+        accessToken,
+        refreshToken: this.refreshToken,
+      },
     });
   }
 
