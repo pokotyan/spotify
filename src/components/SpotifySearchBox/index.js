@@ -10,17 +10,20 @@ class SpotifySearchBox extends Component {
     } = this.props;
 
     return (
-      <input
-        type="text"
-        onChange={(e) => {
-          search({
-            accessToken,
-            refreshToken,
-            query: e.target.value,
-            type: 'album,artist,playlist,track',
-          });
-        }}
-      />
+      <div>
+        <span>アーティスト、曲、アルバム、プレイリスト検索</span>
+        <input
+          type="text"
+          onChange={(e) => {
+            search({
+              accessToken,
+              refreshToken,
+              query: e.target.value,
+              type: 'artist,track,album,playlist',
+            });
+          }}
+        />
+      </div>
     );
   }
 }
