@@ -1,7 +1,8 @@
-/* eslint class-methods-use-this: ["error", { "exceptMethods": ["refreshAccessToken"] }] */
+/* eslint class-methods-use-this: ["error", { "exceptMethods": ["_refreshAccessToken"] }] */
 
 const querystring = require('querystring');
 const rp = require('request-promise');
+const db = require('../../models');
 
 const clientId = 'e9ff433139b84602b251d4cb5d4e40b2';
 const clientSecret = '7cc50c11da2547388f5e49ae6a0eae7a';
@@ -39,10 +40,12 @@ class Spotify {
     });
   }
 
-  refreshAccessToken(refreshToken) {
+  async _refreshAccessToken(refreshToken) {
     const buf = Buffer.from(`${clientId}:${clientSecret}`);
 
-    return rp({
+    const {
+      access_token: accessToken,
+    } = await rp({
       method: 'POST',
       uri: 'https://accounts.spotify.com/api/token',
       headers: {
@@ -55,21 +58,44 @@ class Spotify {
       },
       json: true,
     });
+
+    this.accessToken = accessToken;
+
+    return accessToken;
   }
 
-  async fetchUser() {
-    const {
-      access_token: accessToken,
-    } = await this.refreshAccessToken(this.refreshToken);
+  async request({ method, uri }) {
+    const accessToken = await this._refreshAccessToken(this.refreshToken);
 
     return rp({
-      method: 'GET',
-      uri: 'https://api.spotify.com/v1/me',
+      method,
+      uri,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       json: true,
     });
+  }
+
+  async saveTokenToDB({ spotifyId }) {
+    const user = await db.users.findOne({
+      where: { spotify_id: spotifyId },
+    });
+
+    if (user) {
+      await db.users.update({
+        access_token: this.accessToken,
+        refresh_token: this.refreshToken,
+      }, {
+        where: { spotify_id: spotifyId },
+      });
+    } else {
+      await db.users.create({
+        spotify_id: spotifyId,
+        access_token: this.accessToken,
+        refresh_token: this.refreshToken,
+      });
+    }
   }
 }
 

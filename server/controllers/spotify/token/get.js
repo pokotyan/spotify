@@ -1,4 +1,3 @@
-const db = require('../../../models');
 const SpotifyUtil = require('../../utils/spotify');
 
 module.exports = async (req, res, next) => {
@@ -11,27 +10,10 @@ module.exports = async (req, res, next) => {
 
   const spotifyUtil = new SpotifyUtil({ accessToken, refreshToken });
   const {
-    id: userId,
-  } = await spotifyUtil.fetchUser();
+    id: spotifyId,
+  } = await spotifyUtil.request({ method: 'GET', uri: 'https://api.spotify.com/v1/me' });
 
-  const user = await db.users.findOne({
-    where: { spotify_id: userId },
-  });
-
-  if (user) {
-    await db.users.update({
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    }, {
-      where: { spotify_id: userId },
-    });
-  } else {
-    await db.users.create({
-      spotify_id: userId,
-      access_token: accessToken,
-      refresh_token: refreshToken,
-    });
-  }
+  await spotifyUtil.saveTokenToDB({ spotifyId });
 
   res.send({
     accessToken,
