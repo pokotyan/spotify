@@ -20,7 +20,7 @@ class Spotify {
         response_type: 'code',
         client_id: clientId,
         redirect_uri: redirectUri,
-        scope: 'user-read-playback-state',
+        scope: 'user-read-playback-state user-modify-playback-state',
         // state: state
       })}`;
   }
@@ -75,17 +75,29 @@ class Spotify {
     });
   }
 
-  async request({ method, uri }) {
+  async request({
+    method, uri, body, headersOption,
+  }) {
     const accessToken = await this._refreshAccessToken(this.refreshToken);
 
-    const response = await rp({
+    const option = {
       method,
       uri,
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
       json: true,
-    });
+    };
+
+    if (body) {
+      option.body = body;
+    }
+
+    if (headersOption) {
+      option.headers = Object.assign(option.headers, headersOption);
+    }
+
+    const response = await rp(option);
 
     return Object.assign({}, { response }, {
       latestToken: {

@@ -15,14 +15,19 @@ class SpotifySearchBox extends Component {
         <input
           type="text"
           onChange={(e) => {
-            search({
-              accessToken,
-              refreshToken,
-              query: e.target.value,
-              type: 'artist,track,album,playlist',
-            });
+            this.setState({ word: e.target.value });
           }}
         />
+        <button onClick={() => {
+          search({
+            accessToken,
+            refreshToken,
+            query: this.state.word,
+            type: 'artist,track,album,playlist',
+          });
+        }}
+        >検索
+        </button>
       </div>
     );
   }

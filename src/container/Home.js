@@ -46,6 +46,7 @@ class Home extends Component {
       spotifyActions: {
         fetchDevice,
         search,
+        play,
       },
       // spotify: {
       //   auth: {
@@ -59,17 +60,41 @@ class Home extends Component {
         <h2>Home</h2>
         {this.props.spotify.auth.accessToken &&
           <div>
-            {/* <GetDevice
+            <GetDevice
               fetchDevice={fetchDevice}
               accessToken={this.props.spotify.auth.accessToken}
               refreshToken={this.props.spotify.auth.refreshToken}
-            /> */}
+            />
             <SearchBox
               search={search}
               accessToken={this.props.spotify.auth.accessToken}
               refreshToken={this.props.spotify.auth.refreshToken}
             />
           </div>
+        }
+        {this.props.spotify.search && this.props.spotify.search.albums ?
+          this.props.spotify.search.albums.items.map((item) => (
+            <li
+              key={item.id}
+              style={{ 'list-style-type': 'none' }}
+            >
+              <div>
+                { item.images[0] &&
+                  <img
+                    src={item.images[0].url}
+                    alt=""
+                    onClick={(e) => {
+                      play({
+                        contextUri: item.uri,
+                        accessToken: this.props.spotify.auth.accessToken,
+                        refreshToken: this.props.spotify.auth.refreshToken,
+                      });
+                    }}
+                  />
+                }
+              </div>
+            </li>
+          )): <div></div>
         }
       </div>
     );

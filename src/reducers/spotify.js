@@ -2,11 +2,14 @@ import {
   SET_TOKEN,
   FETCH_DEVICE,
   SEARCH,
+  PLAY,
 } from '../actions/spotify';
 
 const initialState = {
   auth: {},
   device: [],
+  search: {},
+  play: {},
 };
 
 function pokemon(state = initialState, action) {
@@ -22,6 +25,10 @@ function pokemon(state = initialState, action) {
     case SEARCH:
       return Object.assign({}, state, {
         search: action.payload,
+      });
+    case PLAY:
+      return Object.assign({}, state, {
+        play: action.payload,
       });
 
     default:

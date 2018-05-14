@@ -1,25 +1,31 @@
 const querystring = require('querystring');
+
 const SpotifyUtil = require('../../utils/spotify');
 
 module.exports = async (req, res, next) => {
   const {
     accessToken,
     refreshToken,
-    query,
-    type,
+    contextUri,
   } = req.body;
 
   const spotifyUtil = new SpotifyUtil({ accessToken, refreshToken });
-  const uri = `https://api.spotify.com/v1/search?${
+  const googleHome = '6840806829404813a3e43fb4b2910823';
+  const uri = `https://api.spotify.com/v1/me/player/play?${
     querystring.stringify({
-      q: query,
-      type,
+      device_id: googleHome,
     })}`;
+
   const result = await spotifyUtil.request({
-    method: 'GET',
+    method: 'PUT',
     uri,
     headersOption: {
+      Accept: 'application/json',
       'Content-Type': 'application/json',
+    },
+    body: {
+      context_uri: contextUri,
+      offset: { position: 0 },
     },
   });
 
