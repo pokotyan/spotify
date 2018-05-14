@@ -1,6 +1,7 @@
 import {
   SET_TOKEN,
   FETCH_DEVICE,
+  SEARCH,
 } from '../actions/spotify';
 
 const initialState = {
@@ -17,6 +18,10 @@ function pokemon(state = initialState, action) {
     case FETCH_DEVICE:
       return Object.assign({}, state, {
         device: action.payload,
+      });
+    case SEARCH:
+      return Object.assign({}, state, {
+        search: action.payload,
       });
 
     default:

@@ -2,6 +2,7 @@ export const AUTH = Symbol('AUTH');
 export const FETCH_TOKEN = Symbol('FETCH_TOKEN');
 export const SET_TOKEN = Symbol('SET_TOKEN');
 export const FETCH_DEVICE = Symbol('FETCH_DEVICE');
+export const SEARCH = Symbol('SEARCH');
 
 export const auth = value => ({
   type: AUTH,
@@ -20,5 +21,10 @@ export const setToken = value => ({
 
 export const fetchDevice = value => ({
   type: FETCH_DEVICE,
+  payload: value,
+});
+
+export const search = value => ({
+  type: SEARCH,
   payload: value,
 });

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as spotifyActions from '../actions/spotify';
 import GetDevice from '../components/SpotifyGetDevice';
+import SearchBox from '../components/SpotifySearchBox';
 
 class Home extends Component {
   // componentWillUpdate(nextProps, nextState) {
@@ -44,6 +45,7 @@ class Home extends Component {
     const {
       spotifyActions: {
         fetchDevice,
+        search,
       },
       // spotify: {
       //   auth: {
@@ -56,11 +58,18 @@ class Home extends Component {
       <div>
         <h2>Home</h2>
         {this.props.spotify.auth.accessToken &&
-          <GetDevice
-            fetchDevice={fetchDevice}
-            accessToken={this.props.spotify.auth.accessToken}
-            refreshToken={this.props.spotify.auth.refreshToken}
-          />
+          <div>
+            {/* <GetDevice
+              fetchDevice={fetchDevice}
+              accessToken={this.props.spotify.auth.accessToken}
+              refreshToken={this.props.spotify.auth.refreshToken}
+            /> */}
+            <SearchBox
+              search={search}
+              accessToken={this.props.spotify.auth.accessToken}
+              refreshToken={this.props.spotify.auth.refreshToken}
+            />
+          </div>
         }
       </div>
     );
