@@ -76,7 +76,7 @@ class Home extends Component {
           this.props.spotify.search.albums.items.map((item) => (
             <li
               key={item.id}
-              style={{ 'list-style-type': 'none' }}
+              style={{ 'listStyleType': 'none' }}
             >
               <div>
                 { item.images[0] &&
