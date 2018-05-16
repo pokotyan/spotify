@@ -1,7 +1,7 @@
-// const path = require('path');
-// const browserPlugin = require('webpack-browser-plugin');
-
 module.exports = {
+  // モード値を production に設定すると最適化された状態で、
+  // development に設定するとソースマップ有効でJSファイルが出力される
+  mode: 'development',
   // メインとなるJavaScriptファイル（エントリーポイント）
   entry: [
     'babel-polyfill', // Polyfillも含める
@@ -12,12 +12,9 @@ module.exports = {
     // 出力ファイルのディレクトリ名
     path: `${__dirname}/build`,
     // 出力ファイル名
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
-    loaders: [
-      { test: /\.json$/, loader: 'json-loader' }
-    ],
     rules: [
       {
         // 拡張子 .js の場合
@@ -32,16 +29,16 @@ module.exports = {
                 // env を指定することで、ES2017 を ES5 に変換。
                 // {modules: false}にしないと import 文が Babel によって CommonJS に変換され、
                 // webpack の Tree Shaking 機能が使えない
-                ['env', {'modules': false}],
+                ['env', { modules: false }],
                 // React の JSX を解釈
-                'react'                
-              ]
-            }
-          }
+                'react',
+              ],
+            },
+          },
         ],
         // node_modules は除外する
         exclude: /node_modules/,
-      }
+      },
     ],
   },
   // requestやrequest-promise使う際に必要な設定 https://github.com/request/request/issues/1529
@@ -49,7 +46,7 @@ module.exports = {
     console: true,
     fs: 'empty',
     net: 'empty',
-    tls: 'empty'
+    tls: 'empty',
   },
   // ソースマップを有効にする
   devtool: 'source-map',
@@ -64,15 +61,5 @@ module.exports = {
       changeOrigin: true,
       secure: false,
     },
-    // proxy:{
-    //   '/api/**' : {
-    //     target: 'http://localhost:9000/', 
-    //     changeOrigin: true,
-    //     secure: false,
-    //     pathRewrite: {
-    //       '^/api': ''
-    //     }
-    //   }
-    // }
   },
 };
