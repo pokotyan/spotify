@@ -2,16 +2,12 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const bodyparser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 
-// CORSを許可する
-// https://qiita.com/tomoya_ozawa/items/feca4ffc6217d585b037
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+// CORSを許可する この書き方でもいい https://qiita.com/tomoya_ozawa/items/feca4ffc6217d585b037
+app.use(cors({ origin: true }));
 
 // Middleware
 app.use(bodyparser.urlencoded({ extended: true }));
