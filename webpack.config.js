@@ -50,11 +50,12 @@ module.exports = {
   },
   // ソースマップを有効にする
   devtool: 'source-map',
-  // ローカル開発用環境を立ち上げる
+  // ローカル開発用環境を立ち上げる。open: trueで自動的にブラウザが立ち上がる
   // ブラウザで http://localhost:8081/ でアクセスできるようになる
   devServer: {
     contentBase: 'build',
     port: 8081,
+    open: true,
     proxy: {
       '**': 'http://localhost:9000',
       pathRewrite: { '^/api': '' },
