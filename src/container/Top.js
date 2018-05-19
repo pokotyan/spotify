@@ -26,9 +26,10 @@ class Top extends Component {
 Top.propTypes = {
   spotifyActions: PropTypes.object.isRequired,
 };
-function mapStateToProps(state) {
+
+function mapStateToProps({ rootReducer }) {
   return {
-    about: state.about,
+    spotify: rootReducer.spotify,
   };
 }
 function mapDispatchToProps(dispatch) {

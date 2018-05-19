@@ -1,18 +1,33 @@
 import logger from 'redux-logger';
-import { applyMiddleware, createStore } from 'redux';
+import {
+  applyMiddleware,
+  createStore,
+  combineReducers,
+} from 'redux';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSaga from '../saga';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  rootReducer,
-  applyMiddleware(
-    sagaMiddleware,
-    logger,
-  ),
-);
 
-sagaMiddleware.run(rootSaga);
+export default function reduxCreateStore(history) {
+  return (() => {
+    const store = createStore(
+      combineReducers({
+        rootReducer,
+        router: routerReducer,
+      }),
+      applyMiddleware(
+        sagaMiddleware,
+        routerMiddleware(history),
+        logger,
+      ),
+    );
 
-export default store;
+    // historyをsagaで使えるようにする。https://qiita.com/jun68ykt/items/541cc8247900e126ac5b
+    sagaMiddleware.run(rootSaga, { history });
+
+    return store;
+  })();
+}

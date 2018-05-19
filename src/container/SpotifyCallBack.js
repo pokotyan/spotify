@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { browserHistory } from 'react-router';
+import { withRouter } from 'react-router-dom';
+import qs from 'qs';
 import * as spotifyActions from '../actions/spotify';
 
 class SpotifyCallBack extends Component {
@@ -11,16 +12,16 @@ class SpotifyCallBack extends Component {
       spotifyActions: {
         fetchToken,
       },
+      history,
       location: {
-        query: {
-          code,
-        },
+        search,
       },
     } = this.props;
 
-    await fetchToken(code);
+    const result = qs.parse(search);
+    await fetchToken(result['?code']);
 
-    browserHistory.push('/home');
+    history.push('/home');
   }
 
   render() {
@@ -35,9 +36,9 @@ SpotifyCallBack.propTypes = {
   location: PropTypes.object,
 };
 
-function mapStateToProps(state) {
+function mapStateToProps({ rootReducer }) {
   return {
-    router: state.router,
+    spotify: rootReducer.spotify,
   };
 }
 
@@ -54,4 +55,4 @@ const SpotifyCB = connect(
   mapDispatchToProps,
 )(SpotifyCallBack);
 
-export default SpotifyCB;
+export default withRouter(SpotifyCB);
