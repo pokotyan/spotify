@@ -1,0 +1,16 @@
+.search-bar {
+  width: 100%;
+  display: flex;
+}
+
+.search-bar-input {
+  width: 70%;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+}
+
+.search-bar-icon:before {
+  padding-left: 10px;
+  cursor: pointer;
+}

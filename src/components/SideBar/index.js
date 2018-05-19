@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import GetDevice from '../SpotifyGetDevice';
-import SearchBox from '../SpotifySearchBox';
+import SearchBar from '../SpotifySearchBar';
 
 class SideBar extends Component {
   render() {
@@ -14,12 +14,12 @@ class SideBar extends Component {
 
     return (
       <div className="sidebar-lists">
-        <GetDevice
+        {/* <GetDevice
           fetchDevice={fetchDevice}
           accessToken={accessToken}
           refreshToken={refreshToken}
-        />
-        <SearchBox
+        /> */}
+        <SearchBar
           search={search}
           accessToken={accessToken}
           refreshToken={refreshToken}

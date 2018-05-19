@@ -5,4 +5,5 @@ import './style/app.scss';
 import './style/main/main.scss';
 import './style/main/album.scss';
 import './style/sidebar/sidebar.scss';
+import './style/sidebar/search-bar/search-bar.scss';
 import './style/footer/footer.scss';

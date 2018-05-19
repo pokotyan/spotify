@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from 'semantic-ui-react'
 
 class SpotifySearchBox extends Component {
   render() {
@@ -10,24 +11,29 @@ class SpotifySearchBox extends Component {
     } = this.props;
 
     return (
-      <React.Fragment>
+      <div className="search-bar">
         <input
+          className="search-bar-input"
           type="text"
           onChange={(e) => {
             this.setState({ word: e.target.value });
           }}
         />
-        <button onClick={() => {
-          search({
-            accessToken,
-            refreshToken,
-            query: this.state.word,
-            type: 'artist,track,album,playlist',
-          });
-        }}
-        >検索
-        </button>
-      </React.Fragment>
+        <Icon
+          className="search-bar-icon"
+          name="search"
+          size="large"
+          color="grey"
+          onClick={() => {
+            search({
+              accessToken,
+              refreshToken,
+              query: this.state.word,
+              type: 'artist,track,album,playlist',
+            });
+          }}
+        />
+      </div>
     );
   }
 }
