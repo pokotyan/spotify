@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Dimmer, Loader, Image } from 'semantic-ui-react'
 import * as spotifyActions from '../actions/spotify';
 import SideBar from '../components/SideBar';
 import Main from '../components/Main';
@@ -58,24 +59,32 @@ class Home extends Component {
     return (
       <div className="app">
         <div className="sidebar">
-          {this.props.spotify.auth.accessToken &&
-            <SideBar
-              fetchDevice={fetchDevice}
-              search={search}
-              accessToken={this.props.spotify.auth.accessToken}
-              refreshToken={this.props.spotify.auth.refreshToken}
-            />
-          }
+          {(() => {
+            if (this.props.spotify.auth.accessToken) {
+              return (
+                <SideBar
+                  fetchDevice={fetchDevice}
+                  search={search}
+                  accessToken={this.props.spotify.auth.accessToken}
+                  refreshToken={this.props.spotify.auth.refreshToken}
+                />
+              )
+            }
+            return (
+              <Dimmer active>
+                <Loader>Loading</Loader>
+              </Dimmer>
+            )
+          })()}
         </div>
         <div className="main">
-          {this.props.spotify.search && this.props.spotify.search.albums ?
+          {this.props.spotify.search && this.props.spotify.search.albums &&
             <Main
               albums={this.props.spotify.search.albums}
               play={play}
               accessToken={this.props.spotify.auth.accessToken}
               refreshToken={this.props.spotify.auth.refreshToken}
             />
-            : null
           }
         </div>
         <div className="footer" />
