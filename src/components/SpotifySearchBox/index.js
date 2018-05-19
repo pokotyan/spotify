@@ -10,7 +10,7 @@ class SpotifySearchBox extends Component {
     } = this.props;
 
     return (
-      <div>
+      <React.Fragment>
         <input
           type="text"
           onChange={(e) => {
@@ -27,7 +27,7 @@ class SpotifySearchBox extends Component {
         }}
         >検索
         </button>
-      </div>
+      </React.Fragment>
     );
   }
 }

@@ -13,7 +13,7 @@ class SideBar extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="sidebar-lists">
         <GetDevice
           fetchDevice={fetchDevice}
           accessToken={accessToken}

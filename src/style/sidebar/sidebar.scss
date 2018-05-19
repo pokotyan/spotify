@@ -5,3 +5,10 @@
   grid-column: 1 / 2;
   background-color: #282828;
 }
+
+.sidebar-lists {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
