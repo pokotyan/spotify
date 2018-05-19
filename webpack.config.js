@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   // モード値を production に設定すると最適化された状態で、
   // development に設定するとソースマップ有効でJSファイルが出力される
@@ -38,6 +40,42 @@ module.exports = {
         ],
         // node_modules は除外する
         exclude: /node_modules/,
+      },
+      {
+        // Sassファイルの読み込みとコンパイル
+        test: /\.scss$/, // 対象となるファイルの拡張子
+        use: [
+          // linkタグに出力する機能
+          'style-loader',
+          // CSSをバンドルするための機能
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          'resolve-url-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-resources-loader',
+            options: {
+              resources: [
+                path.join(__dirname, 'src', 'style', '*.scss'),
+              ],
+            },
+          },
+        ],
       },
     ],
   },

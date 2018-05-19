@@ -15,7 +15,7 @@ class Top extends Component {
 
     return (
       <div>
-        <h2>Top</h2>
+        <h2 className="title">Top</h2>
         <SpotifyLogin
           auth={auth}
         />
