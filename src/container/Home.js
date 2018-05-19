@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as spotifyActions from '../actions/spotify';
-import GetDevice from '../components/SpotifyGetDevice';
-import SearchBox from '../components/SpotifySearchBox';
+import SideBar from '../components/SideBar';
 
 class Home extends Component {
   // componentWillUpdate(nextProps, nextState) {
@@ -59,19 +58,13 @@ class Home extends Component {
       <div className="app">
         <div className="sidebar">
           {this.props.spotify.auth.accessToken &&
-              <div>
-                <GetDevice
-                  fetchDevice={fetchDevice}
-                  accessToken={this.props.spotify.auth.accessToken}
-                  refreshToken={this.props.spotify.auth.refreshToken}
-                />
-                <SearchBox
-                  search={search}
-                  accessToken={this.props.spotify.auth.accessToken}
-                  refreshToken={this.props.spotify.auth.refreshToken}
-                />
-              </div>
-            }
+            <SideBar
+              fetchDevice={fetchDevice}
+              search={search}
+              accessToken={this.props.spotify.auth.accessToken}
+              refreshToken={this.props.spotify.auth.refreshToken}
+            />
+          }
         </div>
         <div className="main">
           <div className="album-list-box">
