@@ -11,7 +11,6 @@ class SpotifySearchBox extends Component {
 
     return (
       <div>
-        <span>アーティスト、曲、アルバム、プレイリスト検索</span>
         <input
           type="text"
           onChange={(e) => {

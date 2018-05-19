@@ -11,7 +11,7 @@ class SpotifyLogin extends Component {
       <a
         href="http://localhost:9000/api/spotify/auth"
       >
-        spotify
+        spotifyログイン
       </a>
     );
   }
