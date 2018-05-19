@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as spotifyActions from '../actions/spotify';
 import SideBar from '../components/SideBar';
+import Main from '../components/Main';
 
 class Home extends Component {
   // componentWillUpdate(nextProps, nextState) {
@@ -67,33 +68,15 @@ class Home extends Component {
           }
         </div>
         <div className="main">
-          <div className="album-list-box">
-            {this.props.spotify.search && this.props.spotify.search.albums ?
-              this.props.spotify.search.albums.items.map((item) => (
-                <li
-                  key={item.id}
-                  className="album-list"
-                >
-                  <div>
-                    { item.images[0] &&
-                      <img
-                        className="album-image"
-                        src={item.images[0].url}
-                        alt=""
-                        onClick={(e) => {
-                          play({
-                            contextUri: item.uri,
-                            accessToken: this.props.spotify.auth.accessToken,
-                            refreshToken: this.props.spotify.auth.refreshToken,
-                          });
-                        }}
-                      />
-                    }
-                  </div>
-                </li>
-              )): null
-            }
-          </div>
+          {this.props.spotify.search && this.props.spotify.search.albums ?
+            <Main
+              albums={this.props.spotify.search.albums}
+              play={play}
+              accessToken={this.props.spotify.auth.accessToken}
+              refreshToken={this.props.spotify.auth.refreshToken}
+            />
+            : null
+          }
         </div>
         <div className="footer" />
       </div>
