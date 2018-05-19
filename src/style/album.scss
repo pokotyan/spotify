@@ -1,0 +1,14 @@
+.album-list-box {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.album-list {
+  list-style-type: none;
+}
+
+.album-image {
+  width: 250px;
+  height: 250px;
+}

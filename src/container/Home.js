@@ -56,46 +56,53 @@ class Home extends Component {
     } = this.props;
 
     return (
-      <div>
-        <h2>Home</h2>
-        {this.props.spotify.auth.accessToken &&
-          <div>
-            <GetDevice
-              fetchDevice={fetchDevice}
-              accessToken={this.props.spotify.auth.accessToken}
-              refreshToken={this.props.spotify.auth.refreshToken}
-            />
-            <SearchBox
-              search={search}
-              accessToken={this.props.spotify.auth.accessToken}
-              refreshToken={this.props.spotify.auth.refreshToken}
-            />
-          </div>
-        }
-        {this.props.spotify.search && this.props.spotify.search.albums ?
-          this.props.spotify.search.albums.items.map((item) => (
-            <li
-              key={item.id}
-              style={{ 'listStyleType': 'none' }}
-            >
+      <div className="app">
+        <div className="sidebar">
+          {this.props.spotify.auth.accessToken &&
               <div>
-                { item.images[0] &&
-                  <img
-                    src={item.images[0].url}
-                    alt=""
-                    onClick={(e) => {
-                      play({
-                        contextUri: item.uri,
-                        accessToken: this.props.spotify.auth.accessToken,
-                        refreshToken: this.props.spotify.auth.refreshToken,
-                      });
-                    }}
-                  />
-                }
+                <GetDevice
+                  fetchDevice={fetchDevice}
+                  accessToken={this.props.spotify.auth.accessToken}
+                  refreshToken={this.props.spotify.auth.refreshToken}
+                />
+                <SearchBox
+                  search={search}
+                  accessToken={this.props.spotify.auth.accessToken}
+                  refreshToken={this.props.spotify.auth.refreshToken}
+                />
               </div>
-            </li>
-          )): <div></div>
-        }
+            }
+        </div>
+        <div className="main">
+          <div className="album-list-box">
+            {this.props.spotify.search && this.props.spotify.search.albums ?
+              this.props.spotify.search.albums.items.map((item) => (
+                <li
+                  key={item.id}
+                  className="album-list"
+                >
+                  <div>
+                    { item.images[0] &&
+                      <img
+                        className="album-image"
+                        src={item.images[0].url}
+                        alt=""
+                        onClick={(e) => {
+                          play({
+                            contextUri: item.uri,
+                            accessToken: this.props.spotify.auth.accessToken,
+                            refreshToken: this.props.spotify.auth.refreshToken,
+                          });
+                        }}
+                      />
+                    }
+                  </div>
+                </li>
+              )): null
+            }
+          </div>
+        </div>
+        <div className="footer" />
       </div>
     );
   }

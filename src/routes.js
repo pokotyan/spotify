@@ -13,14 +13,14 @@ import NotFound from './components/NotFound';
 const Routes = (props) => {
   return (
     <ConnectedRouter {...props}>
-      <div>
+      <React.Fragment>
         <Route exact path="/" component={Top} />
         <Route path="/callback" component={CallBack} />
         <Route path="/home" component={Home} />
         <Route path="/about" component={About} />
         <Route path="/pokemon" component={Pokemon} />
         {/* <Route path="*" component={NotFound} /> */}
-      </div>
+      </React.Fragment>
     </ConnectedRouter>
   );
 };
