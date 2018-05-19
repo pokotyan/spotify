@@ -12,7 +12,7 @@ const initialState = {
   play: {},
 };
 
-function pokemon(state = initialState, action) {
+function spotify(state = initialState, action) {
   switch (action.type) {
     case SET_TOKEN:
       return Object.assign({}, state, {
@@ -36,4 +36,4 @@ function pokemon(state = initialState, action) {
   }
 }
 
-export default pokemon;
+export default spotify;
