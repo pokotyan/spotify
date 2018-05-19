@@ -14,7 +14,7 @@ class Top extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="top">
         <SpotifyLogin
           auth={auth}
         />
