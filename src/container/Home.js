@@ -59,23 +59,17 @@ class Home extends Component {
     return (
       <div className="app">
         <div className="sidebar">
-          {(() => {
-            if (this.props.spotify.auth.accessToken) {
-              return (
-                <SideBar
-                  fetchDevice={fetchDevice}
-                  search={search}
-                  accessToken={this.props.spotify.auth.accessToken}
-                  refreshToken={this.props.spotify.auth.refreshToken}
-                />
-              )
-            }
-            return (
-              <Dimmer active>
-                <Loader>Loading</Loader>
-              </Dimmer>
-            )
-          })()}
+          {this.props.spotify.auth.accessToken ?
+            <SideBar
+              fetchDevice={fetchDevice}
+              search={search}
+              accessToken={this.props.spotify.auth.accessToken}
+              refreshToken={this.props.spotify.auth.refreshToken}
+            /> :
+            <Dimmer active>
+              <Loader>Loading</Loader>
+            </Dimmer>
+          }
         </div>
         <div className="main">
           {this.props.spotify.search && this.props.spotify.search.albums &&

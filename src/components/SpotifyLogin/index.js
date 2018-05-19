@@ -1,23 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
+import { Button } from 'semantic-ui-react';
 
-class SpotifyLogin extends Component {
-  render() {
-    const {
-      auth,
-    } = this.props;
-
-    return (
-      <a
-        href="http://localhost:9000/api/spotify/auth"
-      >
-        spotifyログイン
-      </a>
-    );
-  }
-}
-SpotifyLogin.propTypes = {
-  auth: PropTypes.func.isRequired,
+const SpotifyLogin = () => {
+  return (
+    <a href="http://localhost:9000/api/spotify/auth">
+      <Button inverted color="green">
+        spotify ログイン
+      </Button>
+    </a>
+  );
 };
 
 export default SpotifyLogin;
