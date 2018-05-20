@@ -16,6 +16,8 @@ import {
   search,
   PLAY,
   play,
+  FETCH_PLAYLIST,
+  fetchPlayList,
 } from '../actions/spotify';
 
 function* authAsync() {
@@ -163,6 +165,44 @@ function* playAsync() {
   }
 }
 
+function* fetchPlayListAsync() {
+  for (;;) {
+    const action = yield take(FETCH_PLAYLIST);
+    const {
+      accessToken,
+      refreshToken,
+      contextUri,
+    } = action.payload;
+
+    console.log(action.payload);
+    const {
+      response,
+      latestToken,
+    } = yield rp({
+      method: 'POST',
+      uri: 'http://localhost:9000/api/playlist',
+      form: {
+        accessToken,
+        refreshToken,
+        contextUri,
+      },
+      json: true,
+    });
+
+    // store内のトークンの最新化
+    yield put(setToken({
+      accessToken: latestToken.accessToken,
+      refreshToken: latestToken.refreshToken,
+    }));
+
+    console.log(response);
+
+    yield put(fetchPlayList(response));
+
+    continue;
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     fork(authAsync),
@@ -170,5 +210,6 @@ export default function* rootSaga() {
     fork(fetchDeviceAsync),
     fork(searchAsync),
     fork(playAsync),
+    fork(fetchPlayListAsync),
   ]);
 }

@@ -9,23 +9,21 @@ import Main from '../components/Main';
 
 const Home = (props) => {
   const {
-    spotifyActions: {
-      fetchDevice,
+    spotifyActions: spActions,
+    spotify: {
       search,
-      play,
+      auth,
     },
-    spotify,
   } = props;
 
   return (
     <div className="app">
       <div className="sidebar">
-        {spotify.auth.accessToken ?
+        {auth.accessToken ?
           <SideBar
-            fetchDevice={fetchDevice}
-            search={search}
-            accessToken={spotify.auth.accessToken}
-            refreshToken={spotify.auth.refreshToken}
+            spotifyActions={spActions}
+            accessToken={auth.accessToken}
+            refreshToken={auth.refreshToken}
           /> :
           <Dimmer active>
             <Loader>Loading</Loader>
@@ -33,12 +31,12 @@ const Home = (props) => {
         }
       </div>
       <div className="main">
-        {Object.keys(spotify.search).length &&
+        {Object.keys(search).length &&
           <Main
-            search={spotify.search}
-            play={play}
-            accessToken={spotify.auth.accessToken}
-            refreshToken={spotify.auth.refreshToken}
+            search={search}
+            spotifyActions={spActions}
+            accessToken={auth.accessToken}
+            refreshToken={auth.refreshToken}
           />
         }
       </div>

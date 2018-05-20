@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const PlayList = (props) => {
   const {
     item,
-    play,
+    fetchPlayList,
     accessToken,
     refreshToken,
   } = props;
@@ -21,8 +21,8 @@ const PlayList = (props) => {
             src={item.images[0].url}
             alt=""
             onClick={(e) => {
-              play({
-                contextUri: item.uri,
+              fetchPlayList({
+                contextUri: item.tracks.href,
                 accessToken,
                 refreshToken,
               });
@@ -36,7 +36,7 @@ const PlayList = (props) => {
 
 PlayList.propTypes = {
   item: PropTypes.object.isRequired,
-  play: PropTypes.func.isRequired,
+  fetchPlayList: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };

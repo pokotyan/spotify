@@ -3,6 +3,7 @@ import {
   FETCH_DEVICE,
   SEARCH,
   PLAY,
+  FETCH_PLAYLIST,
 } from '../actions/spotify';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   device: [],
   search: {},
   play: {},
+  playlist: {},
 };
 
 function spotify(state = initialState, action) {
@@ -29,6 +31,10 @@ function spotify(state = initialState, action) {
     case PLAY:
       return Object.assign({}, state, {
         play: action.payload,
+      });
+    case FETCH_PLAYLIST:
+      return Object.assign({}, state, {
+        playlist: action.payload,
       });
 
     default:

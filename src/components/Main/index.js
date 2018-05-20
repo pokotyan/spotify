@@ -11,20 +11,23 @@ class Main extends Component {
         playlists,
         artists,
       },
-      play,
+      spotifyActions: {
+        play,
+        fetchPlayList,
+      },
       accessToken,
       refreshToken,
     } = this.props;
 
     return (
-      <React.Fragment>
+      <div className="item-list-container">
         {artists &&
           <div className="item-list-title"><div>アーティスト</div></div>
         }
         <div className="item-list-box">
-        {artists &&
+          {artists &&
           artists.items.map(item => (
-            <PlayList 
+            <PlayList
               item={item}
               play={play}
               accessToken={accessToken}
@@ -39,7 +42,7 @@ class Main extends Component {
         <div className="item-list-box">
           {albums &&
             albums.items.map(item => (
-              <AlbumList 
+              <AlbumList
                 item={item}
                 play={play}
                 accessToken={accessToken}
@@ -52,25 +55,24 @@ class Main extends Component {
           <div className="item-list-title"><div>プレイリスト</div></div>
         }
         <div className="item-list-box">
-        {playlists &&
+          {playlists &&
           playlists.items.map(item => (
-            <PlayList 
+            <PlayList
               item={item}
-              play={play}
+              fetchPlayList={fetchPlayList}
               accessToken={accessToken}
               refreshToken={refreshToken}
             />
           ))
         }
         </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
 
 Main.propTypes = {
-  search: PropTypes.object.isRequired,
-  play: PropTypes.func.isRequired,
+  spotifyActions: PropTypes.object.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };

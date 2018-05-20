@@ -6,8 +6,10 @@ import SearchBar from '../SpotifySearchBar';
 class SideBar extends Component {
   render() {
     const {
-      fetchDevice,
-      search,
+      spotifyActions: {
+        fetchDevice,
+        search,
+      },
       accessToken,
       refreshToken,
     } = this.props;
@@ -30,8 +32,7 @@ class SideBar extends Component {
 }
 
 SideBar.propTypes = {
-  fetchDevice: PropTypes.func.isRequired,
-  search: PropTypes.func.isRequired,
+  spotifyActions: PropTypes.object.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };

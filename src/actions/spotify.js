@@ -4,6 +4,7 @@ export const SET_TOKEN = Symbol('SET_TOKEN');
 export const FETCH_DEVICE = Symbol('FETCH_DEVICE');
 export const SEARCH = Symbol('SEARCH');
 export const PLAY = Symbol('PLAY');
+export const FETCH_PLAYLIST = Symbol('FETCH_PLAYLIST');
 
 export const auth = value => ({
   type: AUTH,
@@ -32,5 +33,10 @@ export const search = value => ({
 
 export const play = value => ({
   type: PLAY,
+  payload: value,
+});
+
+export const fetchPlayList = value => ({
+  type: FETCH_PLAYLIST,
   payload: value,
 });
