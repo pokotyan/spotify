@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
 
 class SpotifyGetDevice extends Component {
   render() {
@@ -10,7 +11,13 @@ class SpotifyGetDevice extends Component {
     } = this.props;
 
     return (
-      <button onClick={() => fetchDevice({ accessToken, refreshToken })}>get Device</button>
+      <Button
+        inverted
+        color='green'
+        onClick={() => fetchDevice({ accessToken, refreshToken })}
+      >
+        device
+      </Button>
     );
   }
 }

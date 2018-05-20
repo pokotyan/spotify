@@ -14,13 +14,13 @@ class SideBar extends Component {
 
     return (
       <div className="sidebar-lists">
-        {/* <GetDevice
-          fetchDevice={fetchDevice}
-          accessToken={accessToken}
-          refreshToken={refreshToken}
-        /> */}
         <SearchBar
           search={search}
+          accessToken={accessToken}
+          refreshToken={refreshToken}
+        />
+        <GetDevice
+          fetchDevice={fetchDevice}
           accessToken={accessToken}
           refreshToken={refreshToken}
         />
