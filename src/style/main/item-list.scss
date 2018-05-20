@@ -1,14 +1,14 @@
-.album-list-box {
+.album-list-box, .playlist-list-box {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
 }
 
-.album-list {
+.album-list, .playlist-list{
   list-style-type: none;
 }
 
-.album-image {
+.album-image, .playlist-image{
   width: 250px;
   height: 250px;
 }

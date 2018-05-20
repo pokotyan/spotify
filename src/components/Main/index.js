@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AlbumList from '../AlbumList';
+import PlayList from '../PlayList';
 
 class Main extends Component {
   render() {
     const {
       search: {
         albums,
+        playlists,
       },
       play,
       accessToken,
@@ -14,10 +16,23 @@ class Main extends Component {
     } = this.props;
 
     return (
-      <div className="album-list-box">
-        {albums ?
-          albums.items.map(item => (
-            <AlbumList 
+      <React.Fragment>
+        <div className="album-list-box">
+          {albums ?
+            albums.items.map(item => (
+              <AlbumList 
+                item={item}
+                play={play}
+                accessToken={accessToken}
+                refreshToken={refreshToken}
+              />
+            )) : null
+          }
+        </div>
+        <div className="playlist-list-box">
+        {playlists ?
+          playlists.items.map(item => (
+            <PlayList 
               item={item}
               play={play}
               accessToken={accessToken}
@@ -25,7 +40,8 @@ class Main extends Component {
             />
           )) : null
         }
-      </div>
+        </div>
+      </React.Fragment>
     );
   }
 }
