@@ -174,7 +174,6 @@ function* fetchPlayListAsync() {
       contextUri,
     } = action.payload;
 
-    console.log(action.payload);
     const {
       response,
       latestToken,
@@ -194,8 +193,6 @@ function* fetchPlayListAsync() {
       accessToken: latestToken.accessToken,
       refreshToken: latestToken.refreshToken,
     }));
-
-    console.log(response);
 
     yield put(fetchPlayList(response));
 
