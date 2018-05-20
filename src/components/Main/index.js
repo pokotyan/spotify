@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ArtistList from '../ArtistList';
 import AlbumList from '../AlbumList';
 import PlayList from '../PlayList';
 
@@ -27,7 +28,7 @@ class Main extends Component {
         <div className="item-list-box">
           {artists &&
           artists.items.map(item => (
-            <PlayList
+            <ArtistList
               item={item}
               play={play}
               accessToken={accessToken}
