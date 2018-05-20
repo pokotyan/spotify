@@ -72,9 +72,9 @@ class Home extends Component {
           }
         </div>
         <div className="main">
-          {this.props.spotify.search && this.props.spotify.search.albums &&
+          {Object.keys(this.props.spotify.search).length &&
             <Main
-              albums={this.props.spotify.search.albums}
+              search={this.props.spotify.search}
               play={play}
               accessToken={this.props.spotify.auth.accessToken}
               refreshToken={this.props.spotify.auth.refreshToken}
