@@ -9,6 +9,7 @@ class Main extends Component {
       search: {
         albums,
         playlists,
+        artists,
       },
       play,
       accessToken,
@@ -17,8 +18,26 @@ class Main extends Component {
 
     return (
       <React.Fragment>
-        <div className="album-list-box">
-          {albums ?
+        {artists &&
+          <div className="item-list-title"><div>アーティスト</div></div>
+        }
+        <div className="item-list-box">
+        {artists &&
+          artists.items.map(item => (
+            <PlayList 
+              item={item}
+              play={play}
+              accessToken={accessToken}
+              refreshToken={refreshToken}
+            />
+          ))
+        }
+        </div>
+        {albums &&
+          <div className="item-list-title"><div>アルバム</div></div>
+        }
+        <div className="item-list-box">
+          {albums &&
             albums.items.map(item => (
               <AlbumList 
                 item={item}
@@ -26,11 +45,14 @@ class Main extends Component {
                 accessToken={accessToken}
                 refreshToken={refreshToken}
               />
-            )) : null
+            ))
           }
         </div>
-        <div className="playlist-list-box">
-        {playlists ?
+        {playlists &&
+          <div className="item-list-title"><div>プレイリスト</div></div>
+        }
+        <div className="item-list-box">
+        {playlists &&
           playlists.items.map(item => (
             <PlayList 
               item={item}
@@ -38,7 +60,7 @@ class Main extends Component {
               accessToken={accessToken}
               refreshToken={refreshToken}
             />
-          )) : null
+          ))
         }
         </div>
       </React.Fragment>

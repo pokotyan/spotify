@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PlayList = (props) => {
+const ArtistList = (props) => {
   const {
     item,
     play,
@@ -34,11 +34,11 @@ const PlayList = (props) => {
   );
 };
 
-PlayList.propTypes = {
+ArtistList.propTypes = {
   item: PropTypes.object.isRequired,
   play: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };
 
-export default PlayList;
+export default ArtistList;

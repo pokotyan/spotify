@@ -12,12 +12,12 @@ const AlbumList = (props) => {
   return (
     <li
       key={item.id}
-      className="album-list"
+      className="item-list"
     >
       <div>
         { item.images[0] &&
           <img
-            className="album-image"
+            className="item-image"
             src={item.images[0].url}
             alt=""
             onClick={(e) => {

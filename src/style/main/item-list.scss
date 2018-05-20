@@ -1,14 +1,27 @@
-.album-list-box, .playlist-list-box {
+.item-list-title {
   display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+
+  div {
+    font-size: 30px;
+    color: white;
+  }
 }
 
-.album-list, .playlist-list{
+.item-list-box {
+  display: grid;
+  grid-auto-rows: 250px;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-gap: 10px 10px;
+}
+
+.item-list{
   list-style-type: none;
 }
 
-.album-image, .playlist-image{
+.item-image{
   width: 250px;
   height: 250px;
 }
