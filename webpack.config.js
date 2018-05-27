@@ -6,6 +6,7 @@ module.exports = {
   mode: 'development',
   // メインとなるJavaScriptファイル（エントリーポイント）
   entry: [
+    'react-hot-loader/patch', // react-hot-loaderを使えるようにする
     'babel-polyfill', // Polyfillも含める
     './src/index.js',
   ],

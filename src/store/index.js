@@ -28,6 +28,15 @@ export default function reduxCreateStore(history) {
     // historyをsagaで使えるようにする。https://qiita.com/jun68ykt/items/541cc8247900e126ac5b
     sagaMiddleware.run(rootSaga, { history });
 
+    if (module.hot) {
+      // Enable Webpack hot module replacement for reducers
+      module.hot.accept('../reducers', () => {
+        const nextRootReducer = rootReducer;
+
+        store.replaceReducer(nextRootReducer);
+      });
+    }
+
     return store;
   })();
 }
