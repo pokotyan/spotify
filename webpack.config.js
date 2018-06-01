@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -8,14 +9,15 @@ module.exports = {
   entry: [
     'react-hot-loader/patch', // react-hot-loaderを使えるようにする
     'babel-polyfill', // Polyfillも含める
+    'webpack-hot-middleware/client?reload=true', // webpack-dev-serverを独自のexpressで動かす際、HMRするなら必要な記述
     './src/index.js',
   ],
-  // ファイルの出力設定
-  output: {
+  output: { // ファイルの出力設定 https://stackoverflow.com/questions/28846814/what-does-publicpath-in-webpack-do
     // 出力ファイルのディレクトリ名
     path: `${__dirname}/build`,
     // 出力ファイル名
     filename: 'bundle.js',
+    publicPath: '/' // build/index.htmlからみたバンドルされたファイルたちのパス。webpack-dev-serverを独自のexpressで動かす際にこの設定がいる
   },
   module: {
     rules: [
@@ -87,19 +89,23 @@ module.exports = {
     net: 'empty',
     tls: 'empty',
   },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(), // webpack-dev-serverを独自のexpressで動かす際にHMRするなら、このプラグイン必要
+  ],
   // ソースマップを有効にする
   devtool: 'source-map',
   // ローカル開発用環境を立ち上げる。open: trueで自動的にブラウザが立ち上がる
   // ブラウザで http://localhost:8081/ でアクセスできるようになる
   devServer: {
     contentBase: 'build',
-    port: 8081,
-    open: true,
-    proxy: {
-      '**': 'http://localhost:9000',
-      pathRewrite: { '^/api': '' },
-      changeOrigin: true,
-      secure: false,
-    },
+    // open: true, // expressにwebpack dev server組み込んで使った場合、この指定が効いていないぽい
+    proxy:{
+      '**' : {
+        target: 'http://localhost:9000', 
+        pathRewrite: { '^/api': '' },
+        changeOrigin: true,
+        secure: false,
+      }
+    }
   },
 };
