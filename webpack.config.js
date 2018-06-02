@@ -18,7 +18,7 @@ module.exports = {
     path: `${__dirname}/build`,
     // 出力ファイル名
     filename: 'bundle.js',
-    publicPath: '/' // build/index.htmlからみたバンドルされたファイルたちのパス。webpack-dev-serverを独自のexpressで動かす際にこの設定がいる
+    publicPath: '/', // build/index.htmlからみたバンドルされたファイルたちのパス。webpack-dev-serverを独自のexpressで動かす際にこの設定がいる
   },
   module: {
     rules: [
@@ -100,13 +100,13 @@ module.exports = {
   devServer: {
     contentBase: 'build',
     // open: true, // expressにwebpack dev server組み込んで使った場合、この指定が効いていないぽい
-    proxy:{
-      '**' : {
-        target: 'http://localhost:9000', 
+    proxy: {
+      '/api/*': {
+        target: 'http://localhost:9000',
         pathRewrite: { '^/api': '' },
         changeOrigin: true,
         secure: false,
-      }
-    }
+      },
+    },
   },
 };
