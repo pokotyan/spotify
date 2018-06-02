@@ -10,7 +10,11 @@ const history = createBrowserHistory();
 const store = createStore(history);
 
 const render = () => {
-  ReactDOM.render(
+  // ReactDOM.hydrate使ったら、Warning: Expected server HTML to contain a matching <div> in <div>.というのがdevツールに出た。調べたら以下の対処法があった。
+  // https://github.com/nozzle/react-static/issues/144
+  const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
+
+  renderMethod(
     <AppContainer>
       <Provider store={store}>
         <Routes history={history} />

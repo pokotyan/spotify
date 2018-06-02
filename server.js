@@ -30,6 +30,11 @@ if (process.env.NODE_ENV !== 'production') {
 // Serve static files
 app.use(express.static(path.resolve(__dirname, 'build')));
 
+// ssrをミドルウェアに登録
+app.get('*', (req, res) => {
+  require('./src/server')(req, res);
+})
+
 console.log(`Served: http://localhost:${port}`);
 app.listen(port, (err) => {
   if (err) {
