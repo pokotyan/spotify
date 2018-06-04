@@ -9,22 +9,16 @@ module.exports = {
     './server.js',
   ],
   output: {
-    path: path.join(process.cwd(), 'build'),
-    filename: 'server.js',
+    path: path.join(process.cwd()),
+    filename: './server.bundle.js',
+    libraryTarget: 'commonjs2',
   },
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
-        include: path.join(process.cwd(), 'src'),
         exclude: /node_modules/,
-        options: {
-          presets: [
-            ['env', { modules: false }],
-            'react',
-          ],
-        },
       },
     ],
   },
