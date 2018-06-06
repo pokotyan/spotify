@@ -7,7 +7,7 @@ import qs from 'qs';
 import * as spotifyActions from '../actions/spotify';
 
 class SpotifyCallBack extends Component {
-  async componentWillMount() {
+  async componentDidMount() {
     const {
       spotifyActions: {
         fetchToken,
@@ -36,9 +36,9 @@ SpotifyCallBack.propTypes = {
   location: PropTypes.object,
 };
 
-function mapStateToProps({ rootReducer }) {
+function mapStateToProps(state) {
   return {
-    spotify: rootReducer.spotify,
+    spotify: state.spotify,
   };
 }
 

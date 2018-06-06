@@ -10,9 +10,9 @@ const Top = () => (
   </div>
 );
 
-function mapStateToProps({ rootReducer }) {
+function mapStateToProps(state) {
   return {
-    spotify: rootReducer.spotify,
+    spotify: state.spotify,
   };
 }
 function mapDispatchToProps(dispatch) {

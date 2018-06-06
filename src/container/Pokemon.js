@@ -39,9 +39,9 @@ Pokemon.propTypes = {
   pokemon: PropTypes.object,
 };
 
-function mapStateToProps({ rootReducer }) {
+function mapStateToProps(state) {
   return {
-    pokemon: rootReducer.pokemon,
+    pokemon: state.pokemon,
   };
 }
 

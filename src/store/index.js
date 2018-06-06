@@ -2,9 +2,8 @@ import logger from 'redux-logger';
 import {
   applyMiddleware,
   createStore,
-  combineReducers,
 } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from '../reducers';
 import rootSaga from '../saga';
@@ -14,10 +13,7 @@ const sagaMiddleware = createSagaMiddleware();
 export default function reduxCreateStore(history) {
   return (() => {
     const store = createStore(
-      combineReducers({
-        rootReducer,
-        router: routerReducer,
-      }),
+      rootReducer,
       applyMiddleware(
         sagaMiddleware,
         routerMiddleware(history),

@@ -6,6 +6,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import proxyMiddleware from 'http-proxy-middleware';
 import React from 'react';
 import { renderToStaticNodeStream } from 'react-dom/server';
+import { StaticRouter } from 'react-router-dom';
 // import Helmet from 'react-helmet';
 import { AppContainer } from 'react-hot-loader';
 import { Provider } from 'react-redux';
@@ -41,10 +42,13 @@ app.use(express.static(path.resolve(__dirname, 'build')));
 
 // SSRをするミドルウェアを登録
 app.get('*', (req, res) => {
+  console.log('----------------------ssr-----------------------');
+
   // https://github.com/ReactTraining/react-router/issues/4977
   // ブラウザ履歴はサーバー側には存在しないのでcreateMemoryHistoryを使う
   const history = createMemoryHistory();
   const store = createStore(history);
+  const context = {}; // contextにはレンダリング結果が入る
 
   res.write('<!DOCTYPE html>');
 
@@ -60,7 +64,9 @@ app.get('*', (req, res) => {
         <div id="app">
           <AppContainer>
             <Provider store={store}>
-              <Routes history={history} />
+              <StaticRouter location={req.url} context={context} >
+                <Routes history={history} />
+              </StaticRouter>
             </Provider>
           </AppContainer>
         </div>

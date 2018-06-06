@@ -49,9 +49,9 @@ Home.propTypes = {
   spotifyActions: PropTypes.object.isRequired,
   spotify: PropTypes.object,
 };
-function mapStateToProps({ rootReducer }) {
+function mapStateToProps(state) {
   return {
-    spotify: rootReducer.spotify,
+    spotify: state.spotify,
   };
 }
 function mapDispatchToProps(dispatch) {

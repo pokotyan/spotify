@@ -32,9 +32,9 @@ About.propTypes = {
   about: PropTypes.object,
 };
 
-function mapStateToProps({ rootReducer }) {
+function mapStateToProps(state) {
   return {
-    about: rootReducer.about,
+    about: state.about,
   };
 }
 
