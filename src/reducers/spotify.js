@@ -9,7 +9,7 @@ import {
 const initialState = {
   auth: {},
   device: [],
-  search: {},
+  searchResult: {},
   play: {},
   playlist: {},
 };
@@ -26,7 +26,7 @@ function spotify(state = initialState, action) {
       });
     case SEARCH:
       return Object.assign({}, state, {
-        search: action.payload,
+        searchResult: action.payload,
       });
     case PLAY:
       return Object.assign({}, state, {

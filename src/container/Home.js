@@ -9,9 +9,14 @@ import Main from '../components/Main';
 
 const Home = (props) => {
   const {
-    spotifyActions,
-    spotify: {
+    spotifyActions: {
+      fetchDevice,
       search,
+      play,
+      fetchPlayList,
+    },
+    spotify: {
+      searchResult,
       auth,
     },
   } = props;
@@ -21,7 +26,8 @@ const Home = (props) => {
       <div className="sidebar">
         {auth.accessToken ?
           <SideBar
-            spotifyActions={spotifyActions}
+            fetchDevice={fetchDevice}
+            search={search}
             accessToken={auth.accessToken}
             refreshToken={auth.refreshToken}
           /> :
@@ -31,10 +37,11 @@ const Home = (props) => {
         }
       </div>
       <div className="main">
-        {Object.keys(search).length &&
+        {Object.keys(searchResult).length &&
           <Main
-            search={search}
-            spotifyActions={spotifyActions}
+            play={play}
+            fetchPlayList={fetchPlayList}
+            searchResult={searchResult}
             accessToken={auth.accessToken}
             refreshToken={auth.refreshToken}
           />
@@ -46,9 +53,14 @@ const Home = (props) => {
 };
 
 Home.propTypes = {
-  spotifyActions: PropTypes.object.isRequired,
+  spotifyActions: PropTypes.shape({
+    fetchDevice: PropTypes.func.isRequired,
+    search: PropTypes.func.isRequired,
+    play: PropTypes.func.isRequired,
+    fetchPlayList: PropTypes.func.isRequired,
+  }).isRequired,
   spotify: PropTypes.shape({
-    search: PropTypes.object.isRequired,
+    searchResult: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
   }).isRequired,
 };

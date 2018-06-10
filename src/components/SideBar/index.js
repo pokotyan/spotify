@@ -14,10 +14,8 @@ const Lists = styled.div`
 
 const SideBar = (props) => {
   const {
-    spotifyActions: {
-      fetchDevice,
-      search,
-    },
+    fetchDevice,
+    search,
     accessToken,
     refreshToken,
   } = props;
@@ -40,10 +38,8 @@ const SideBar = (props) => {
 };
 
 SideBar.propTypes = {
-  spotifyActions: PropTypes.shape({
-    fetchDevice: PropTypes.func.isRequired,
-    search: PropTypes.func.isRequired,
-  }).isRequired,
+  fetchDevice: PropTypes.func.isRequired,
+  search: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };

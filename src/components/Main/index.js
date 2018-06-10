@@ -30,15 +30,13 @@ const Thumbnails = styled.div`
 
 const Main = (props) => {
   const {
-    search: {
+    searchResult: {
       albums,
       playlists,
       artists,
     },
-    spotifyActions: {
-      play,
-      fetchPlayList,
-    },
+    play,
+    fetchPlayList,
     accessToken,
     refreshToken,
   } = props;
@@ -95,15 +93,13 @@ const Main = (props) => {
 };
 
 Main.propTypes = {
-  search: PropTypes.shape({
+  searchResult: PropTypes.shape({
     albums: PropTypes.object,
     playlists: PropTypes.object,
     artists: PropTypes.object,
   }).isRequired,
-  spotifyActions: PropTypes.shape({
-    play: PropTypes.func.isRequired,
-    fetchPlayList: PropTypes.func.isRequired,
-  }).isRequired,
+  play: PropTypes.func.isRequired,
+  fetchPlayList: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };
