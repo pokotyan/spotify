@@ -17,7 +17,7 @@ const Home = (props) => {
   } = props;
 
   return (
-    <div className="app">
+    <div className="container">
       <div className="sidebar">
         {auth.accessToken ?
           <SideBar
