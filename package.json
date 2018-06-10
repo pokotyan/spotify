@@ -26,6 +26,7 @@
     "babel-loader": "^7.1.2",
     "babel-plugin-module-alias": "^1.6.0",
     "babel-plugin-module-resolver": "^3.1.0",
+    "babel-plugin-styled-components": "^1.5.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -84,6 +85,6 @@
     "semantic-ui-react": "^0.80.0",
     "sequelize": "^4.33.3",
     "sequelize-cli": "^3.2.0",
-    "styled-components": "^3.2.0"
+    "styled-components": "^3.3.2"
   }
 }

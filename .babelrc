@@ -5,6 +5,9 @@
   ],
   "plugins": [
     "transform-object-rest-spread",
-    "react-hot-loader/babel"
+    "react-hot-loader/babel",
+    ["babel-plugin-styled-components", {
+      "ssr": true
+    }]
   ]
 }

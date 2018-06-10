@@ -1,8 +1,32 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ArtistList from '../ArtistList';
 import AlbumList from '../AlbumList';
 import PlayList from '../PlayList';
+
+const Container = styled.div`
+  padding: 10px;
+`;
+
+const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+
+  div {
+    font-size: 30px;
+    color: white;
+  }
+`;
+
+const Thumbnails = styled.div`
+  display: grid;
+  grid-auto-rows: 250px;
+  grid-template-columns: repeat(auto-fill, 250px);
+  grid-gap: 10px 10px;
+`;
 
 class Main extends Component {
   render() {
@@ -21,11 +45,11 @@ class Main extends Component {
     } = this.props;
 
     return (
-      <div className="item-list-container">
+      <Container>
         {artists &&
-          <div className="item-list-title"><div>アーティスト</div></div>
+          <Title><div>アーティスト</div></Title>
         }
-        <div className="item-list-box">
+        <Thumbnails>
           {artists &&
           artists.items.map(item => (
             <ArtistList
@@ -36,11 +60,11 @@ class Main extends Component {
             />
           ))
         }
-        </div>
+        </Thumbnails>
         {albums &&
-          <div className="item-list-title"><div>アルバム</div></div>
+          <Title><div>アルバム</div></Title>
         }
-        <div className="item-list-box">
+        <Thumbnails>
           {albums &&
             albums.items.map(item => (
               <AlbumList
@@ -51,11 +75,11 @@ class Main extends Component {
               />
             ))
           }
-        </div>
+        </Thumbnails>
         {playlists &&
-          <div className="item-list-title"><div>プレイリスト</div></div>
+          <Title><div>プレイリスト</div></Title>
         }
-        <div className="item-list-box">
+        <Thumbnails>
           {playlists &&
           playlists.items.map(item => (
             <PlayList
@@ -66,8 +90,8 @@ class Main extends Component {
             />
           ))
         }
-        </div>
-      </div>
+        </Thumbnails>
+      </Container>
     );
   }
 }

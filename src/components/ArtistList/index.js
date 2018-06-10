@@ -1,5 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const ItemList = styled.div`
+  list-style-type: none;
+`;
+
+const ItemImage = styled.img`
+  width: 250px;
+  height: 250px;
+`;
 
 const ArtistList = (props) => {
   const {
@@ -10,14 +20,12 @@ const ArtistList = (props) => {
   } = props;
 
   return (
-    <li
+    <ItemList
       key={item.id}
-      className="item-list"
     >
       <div>
         { item.images[0] &&
-          <img
-            className="item-image"
+          <ItemImage
             src={item.images[0].url}
             alt=""
             onClick={(e) => {
@@ -30,7 +38,7 @@ const ArtistList = (props) => {
           />
         }
       </div>
-    </li>
+    </ItemList>
   );
 };
 

@@ -1,6 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Icon } from 'semantic-ui-react'
+import { Icon } from 'semantic-ui-react';
+import styled from 'styled-components';
+
+const SearchBar = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
+const InputSearchText = styled.input`
+  width: 70%;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+`;
+
+const SearchIcon = styled(Icon)`
+  &:before {
+    padding-left: 10px;
+    cursor: pointer;
+  }
+`;
 
 class SpotifySearchBox extends Component {
   render() {
@@ -11,15 +31,14 @@ class SpotifySearchBox extends Component {
     } = this.props;
 
     return (
-      <div className="search-bar">
-        <input
-          className="search-bar-input"
+      <SearchBar>
+        <InputSearchText
           type="text"
           onChange={(e) => {
             this.setState({ word: e.target.value });
           }}
         />
-        <Icon
+        <SearchIcon
           className="search-bar-icon"
           name="search"
           size="large"
@@ -33,7 +52,7 @@ class SpotifySearchBox extends Component {
             });
           }}
         />
-      </div>
+      </SearchBar>
     );
   }
 }
