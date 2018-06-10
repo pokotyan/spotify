@@ -5,14 +5,11 @@ import {
   all,
   fork,
 } from 'redux-saga/effects';
-import {
-  INCREMENT,
-  increment,
-} from '../actions/about';
+import * as aboutActions from '../actions/about';
 
-function* incrementAsync() {
+function* increment() {
   for (;;) {
-    yield take(INCREMENT);
+    yield take(aboutActions.INCREMENT);
 
     const result = yield rp({
       method: 'GET',
@@ -20,14 +17,12 @@ function* incrementAsync() {
       json: true,
     });
 
-    yield put(increment(result.data.count));
-
-    continue;
+    yield put(aboutActions.increment(result.data.count));
   }
 }
 
 export default function* rootSaga() {
   yield all([
-    fork(incrementAsync),
+    fork(increment),
   ]);
 }

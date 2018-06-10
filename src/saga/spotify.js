@@ -5,24 +5,12 @@ import {
   all,
   fork,
 } from 'redux-saga/effects';
-import {
-  AUTH,
-  auth,
-  FETCH_TOKEN,
-  setToken,
-  FETCH_DEVICE,
-  fetchDevice,
-  SEARCH,
-  search,
-  PLAY,
-  play,
-  FETCH_PLAYLIST,
-  fetchPlayList,
-} from '../actions/spotify';
+import * as spotifyActions from '../actions/spotify';
 
-function* authAsync() {
+
+function* auth() {
   for (;;) {
-    yield take(AUTH);
+    yield take(spotifyActions.AUTH);
 
     yield rp({
       method: 'GET',
@@ -30,15 +18,13 @@ function* authAsync() {
       json: true,
     });
 
-    yield put(auth());
-
-    continue;
+    yield put(spotifyActions.auth());
   }
 }
 
-function* fetchTokenAsync() {
+function* fetchToken() {
   for (;;) {
-    const action = yield take(FETCH_TOKEN);
+    const action = yield take(spotifyActions.FETCH_TOKEN);
 
     const code = action.payload;
 
@@ -51,18 +37,16 @@ function* fetchTokenAsync() {
       json: true,
     });
 
-    yield put(setToken({
+    yield put(spotifyActions.setToken({
       accessToken,
       refreshToken,
     }));
-
-    continue;
   }
 }
 
-function* fetchDeviceAsync() {
+function* fetchDevice() {
   for (;;) {
-    const action = yield take(FETCH_DEVICE);
+    const action = yield take(spotifyActions.FETCH_DEVICE);
     const {
       accessToken,
       refreshToken,
@@ -82,20 +66,18 @@ function* fetchDeviceAsync() {
     });
 
     // store内のトークンの最新化
-    yield put(setToken({
+    yield put(spotifyActions.setToken({
       accessToken: latestToken.accessToken,
       refreshToken: latestToken.refreshToken,
     }));
 
-    yield put(fetchDevice(response));
-
-    continue;
+    yield put(spotifyActions.fetchDevice(response));
   }
 }
 
-function* searchAsync() {
+function* search() {
   for (;;) {
-    const action = yield take(SEARCH);
+    const action = yield take(spotifyActions.SEARCH);
     const {
       accessToken,
       refreshToken,
@@ -119,20 +101,18 @@ function* searchAsync() {
     });
 
     // store内のトークンの最新化
-    yield put(setToken({
+    yield put(spotifyActions.setToken({
       accessToken: latestToken.accessToken,
       refreshToken: latestToken.refreshToken,
     }));
 
-    yield put(search(response));
-
-    continue;
+    yield put(spotifyActions.search(response));
   }
 }
 
-function* playAsync() {
+function* play() {
   for (;;) {
-    const action = yield take(PLAY);
+    const action = yield take(spotifyActions.PLAY);
     const {
       accessToken,
       refreshToken,
@@ -154,20 +134,18 @@ function* playAsync() {
     });
 
     // store内のトークンの最新化
-    yield put(setToken({
+    yield put(spotifyActions.setToken({
       accessToken: latestToken.accessToken,
       refreshToken: latestToken.refreshToken,
     }));
 
-    yield put(play(response));
-
-    continue;
+    yield put(spotifyActions.play(response));
   }
 }
 
-function* fetchPlayListAsync() {
+function* fetchPlayList() {
   for (;;) {
-    const action = yield take(FETCH_PLAYLIST);
+    const action = yield take(spotifyActions.FETCH_PLAYLIST);
     const {
       accessToken,
       refreshToken,
@@ -189,24 +167,22 @@ function* fetchPlayListAsync() {
     });
 
     // store内のトークンの最新化
-    yield put(setToken({
+    yield put(spotifyActions.setToken({
       accessToken: latestToken.accessToken,
       refreshToken: latestToken.refreshToken,
     }));
 
-    yield put(fetchPlayList(response));
-
-    continue;
+    yield put(spotifyActions.fetchPlayList(response));
   }
 }
 
 export default function* rootSaga() {
   yield all([
-    fork(authAsync),
-    fork(fetchTokenAsync),
-    fork(fetchDeviceAsync),
-    fork(searchAsync),
-    fork(playAsync),
-    fork(fetchPlayListAsync),
+    fork(auth),
+    fork(fetchToken),
+    fork(fetchDevice),
+    fork(search),
+    fork(play),
+    fork(fetchPlayList),
   ]);
 }

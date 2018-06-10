@@ -6,18 +6,12 @@ import {
   fork,
   select,
 } from 'redux-saga/effects';
-import {
-  GET,
-  get,
-  CORRECT,
-  correct,
-  UN_CORRECT,
-  unCorrect,
-} from '../actions/pokemon';
+import * as pokemonActions from '../actions/pokemon';
 
-function* getAsync() {
+
+function* get() {
   for (;;) {
-    yield take(GET);
+    yield take(pokemonActions.GET);
 
     const result = yield rp({
       method: 'GET',
@@ -25,39 +19,33 @@ function* getAsync() {
       json: true,
     });
 
-    yield put(get(result));
-
-    continue;
+    yield put(pokemonActions.get(result));
   }
 }
 
-function* quizCorrectSync() {
+function* quizCorrect() {
   for (;;) {
-    yield take(CORRECT);
+    yield take(pokemonActions.CORRECT);
     const state = yield select();
     console.log(state);
-    yield put(correct({ correct: true }));
-
-    continue;
+    yield put(pokemonActions.correct({ correct: true }));
   }
 }
 
-function* quizUnCorrectSync() {
+function* quizUnCorrect() {
   for (;;) {
-    yield take(UN_CORRECT);
+    yield take(pokemonActions.UN_CORRECT);
     const state = yield select();
     console.log(state);
 
-    yield put(unCorrect({ correct: false }));
-
-    continue;
+    yield put(pokemonActions.unCorrect({ correct: false }));
   }
 }
 
 export default function* rootSaga() {
   yield all([
-    fork(getAsync),
-    fork(quizCorrectSync),
-    fork(quizUnCorrectSync),
+    fork(get),
+    fork(quizCorrect),
+    fork(quizUnCorrect),
   ]);
 }
