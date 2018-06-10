@@ -9,7 +9,7 @@ import Main from '../components/Main';
 
 const Home = (props) => {
   const {
-    spotifyActions: spActions,
+    spotifyActions,
     spotify: {
       search,
       auth,
@@ -21,7 +21,7 @@ const Home = (props) => {
       <div className="sidebar">
         {auth.accessToken ?
           <SideBar
-            spotifyActions={spActions}
+            spotifyActions={spotifyActions}
             accessToken={auth.accessToken}
             refreshToken={auth.refreshToken}
           /> :
@@ -34,7 +34,7 @@ const Home = (props) => {
         {Object.keys(search).length &&
           <Main
             search={search}
-            spotifyActions={spActions}
+            spotifyActions={spotifyActions}
             accessToken={auth.accessToken}
             refreshToken={auth.refreshToken}
           />
@@ -47,7 +47,10 @@ const Home = (props) => {
 
 Home.propTypes = {
   spotifyActions: PropTypes.object.isRequired,
-  spotify: PropTypes.object,
+  spotify: PropTypes.shape({
+    search: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
+  }).isRequired,
 };
 function mapStateToProps(state) {
   return {

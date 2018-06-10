@@ -13,24 +13,24 @@ import { Provider } from 'react-redux';
 import createMemoryHistory from 'history/createMemoryHistory';
 import createStore from './src/store';
 import Routes from './src/routes';
+import webpackConfig from './webpack.config';
 // import createInitialState from './src/utils/createInitialState';
 
 const app = express();
 const port = process.env.PORT || 8081;
- 
+
 if (process.env.NODE_ENV !== 'production') {
-  const config = require('./webpack.config');
-  const compiler = webpack(config);
-  const devConfig = config.devServer;
+  const compiler = webpack(webpackConfig);
+  const devConfig = webpackConfig.devServer;
 
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
-    publicPath: config.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
   }));
   app.use(webpackHotMiddleware(compiler));
 
   // Set up the proxy.
-  if(devConfig.proxy) {
+  if (devConfig.proxy) {
     Object.keys(devConfig.proxy).forEach((context) => {
       app.use(proxyMiddleware(context, devConfig.proxy[context]));
     });

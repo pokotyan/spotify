@@ -43,7 +43,11 @@ const PlayList = (props) => {
 };
 
 PlayList.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    tracks: PropTypes.object.isRequired,
+  }).isRequired,
   fetchPlayList: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,

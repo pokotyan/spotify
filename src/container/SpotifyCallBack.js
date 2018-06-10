@@ -32,8 +32,12 @@ class SpotifyCallBack extends Component {
 }
 
 SpotifyCallBack.propTypes = {
-  spotifyActions: PropTypes.object.isRequired,
-  location: PropTypes.object,
+  spotifyActions: PropTypes.shape({
+    fetchToken: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {

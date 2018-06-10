@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
     },
     body: {
       context_uri: contextUri,
-      offset: { position: 0 },
+      // offset: { position: 0 }, // こういうエラーが返るようになったのでコメントアウト {"error":{"status":400,"message":"Can't have offset for context type: ARTIST"}}
     },
   });
 

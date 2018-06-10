@@ -43,7 +43,11 @@ const ArtistList = (props) => {
 };
 
 ArtistList.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    images: PropTypes.array.isRequired,
+    uri: PropTypes.string.isRequired,
+  }).isRequired,
   play: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,

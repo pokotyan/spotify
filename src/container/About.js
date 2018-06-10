@@ -1,35 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Increment from '../components/Increment';
 import * as aboutActions from '../actions/about';
 
-class About extends Component {
-  render() {
-    const {
-      aboutActions: {
-        increment,
-      },
-      about,
-    } = this.props;
+const About = (props) => {
+  const {
+    aboutActions: {
+      increment,
+    },
+    about,
+  } = props;
 
-    return (
-      <div>
-        <h2>About</h2>
-        <p>aboutページです</p>
-        <Increment
-          increment={increment}
-          about={about}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h2>About</h2>
+      <p>aboutページです</p>
+      <Increment
+        increment={increment}
+        about={about}
+      />
+    </div>
+  );
+};
 
 About.propTypes = {
-  aboutActions: PropTypes.object.isRequired,
-  about: PropTypes.object,
+  aboutActions: PropTypes.shape({
+    increment: PropTypes.func.isRequired,
+  }).isRequired,
+  about: PropTypes.shape({
+    value: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 function mapStateToProps(state) {

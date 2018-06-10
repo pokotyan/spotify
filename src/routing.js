@@ -4,7 +4,7 @@ import Home from './container/Home';
 import About from './container/About';
 import Pokemon from './container/Pokemon';
 import NotFound from './components/NotFound';
- 
+
 const routes = [
   {
     path: '/',
@@ -30,6 +30,6 @@ const routes = [
   {
     component: NotFound,
   },
-]
- 
-export default routes
+];
+
+export default routes;

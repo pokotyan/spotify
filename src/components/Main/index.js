@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ArtistList from '../ArtistList';
@@ -28,31 +28,45 @@ const Thumbnails = styled.div`
   grid-gap: 10px 10px;
 `;
 
-class Main extends Component {
-  render() {
-    const {
-      search: {
-        albums,
-        playlists,
-        artists,
-      },
-      spotifyActions: {
-        play,
-        fetchPlayList,
-      },
-      accessToken,
-      refreshToken,
-    } = this.props;
+const Main = (props) => {
+  const {
+    search: {
+      albums,
+      playlists,
+      artists,
+    },
+    spotifyActions: {
+      play,
+      fetchPlayList,
+    },
+    accessToken,
+    refreshToken,
+  } = props;
 
-    return (
-      <Container>
+  return (
+    <Container>
+      {artists &&
+        <Title><div>アーティスト</div></Title>
+      }
+      <Thumbnails>
         {artists &&
-          <Title><div>アーティスト</div></Title>
-        }
-        <Thumbnails>
-          {artists &&
-          artists.items.map(item => (
-            <ArtistList
+        artists.items.map(item => (
+          <ArtistList
+            item={item}
+            play={play}
+            accessToken={accessToken}
+            refreshToken={refreshToken}
+          />
+        ))
+      }
+      </Thumbnails>
+      {albums &&
+        <Title><div>アルバム</div></Title>
+      }
+      <Thumbnails>
+        {albums &&
+          albums.items.map(item => (
+            <AlbumList
               item={item}
               play={play}
               accessToken={accessToken}
@@ -60,44 +74,36 @@ class Main extends Component {
             />
           ))
         }
-        </Thumbnails>
-        {albums &&
-          <Title><div>アルバム</div></Title>
-        }
-        <Thumbnails>
-          {albums &&
-            albums.items.map(item => (
-              <AlbumList
-                item={item}
-                play={play}
-                accessToken={accessToken}
-                refreshToken={refreshToken}
-              />
-            ))
-          }
-        </Thumbnails>
+      </Thumbnails>
+      {playlists &&
+        <Title><div>プレイリスト</div></Title>
+      }
+      <Thumbnails>
         {playlists &&
-          <Title><div>プレイリスト</div></Title>
-        }
-        <Thumbnails>
-          {playlists &&
-          playlists.items.map(item => (
-            <PlayList
-              item={item}
-              fetchPlayList={fetchPlayList}
-              accessToken={accessToken}
-              refreshToken={refreshToken}
-            />
-          ))
-        }
-        </Thumbnails>
-      </Container>
-    );
-  }
-}
+        playlists.items.map(item => (
+          <PlayList
+            item={item}
+            fetchPlayList={fetchPlayList}
+            accessToken={accessToken}
+            refreshToken={refreshToken}
+          />
+        ))
+      }
+      </Thumbnails>
+    </Container>
+  );
+};
 
 Main.propTypes = {
-  spotifyActions: PropTypes.object.isRequired,
+  search: PropTypes.shape({
+    albums: PropTypes.object,
+    playlists: PropTypes.object,
+    artists: PropTypes.object,
+  }).isRequired,
+  spotifyActions: PropTypes.shape({
+    play: PropTypes.func.isRequired,
+    fetchPlayList: PropTypes.func.isRequired,
+  }).isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };
