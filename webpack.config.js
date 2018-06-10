@@ -46,6 +46,8 @@ module.exports = {
         exclude: /node_modules/,
       },
       {
+        // 備忘録：css modules使いたかったけど、mini-css-extract-pluginのバグ？でうまくいかずhttps://github.com/webpack-contrib/mini-css-extract-plugin/issues
+        // 結局styled_componentsを使うことにした。
         // Sassファイルの読み込みとコンパイル
         test: /\.scss$/, // 対象となるファイルの拡張子
         use: [
