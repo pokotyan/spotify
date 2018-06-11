@@ -106,7 +106,7 @@ function* search() {
       refreshToken: latestToken.refreshToken,
     }));
 
-    yield put(spotifyActions.search(response));
+    yield put(spotifyActions.setSearchResult(response));
   }
 }
 

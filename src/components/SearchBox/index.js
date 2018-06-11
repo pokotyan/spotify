@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -32,34 +32,41 @@ const Input = styled.div`
   }
 `;
 
-const Search = (props) => {
-  const {
-    search,
-    accessToken,
-    refreshToken,
-  } = props;
+class Search extends Component {
+  render() {
+    const {
+      search,
+      accessToken,
+      refreshToken,
+    } = this.props;
 
-  return (
-    <SearchBox>
-      <Discription>
-        アーティスト、ソング、アルバムまたはプレイリストで検索
-      </Discription>
-      <Input>
-        <input
-          type="text"
-          onChange={(e) => {
-            search({
-              accessToken,
-              refreshToken,
-              query: e.target.value,
-              type: 'artist,track,album,playlist',
-            });
-          }}
-        />
-      </Input>
-    </SearchBox>
-  );
-};
+    return (
+      <SearchBox>
+        <Discription>
+          アーティスト、ソング、アルバムまたはプレイリストで検索
+        </Discription>
+        <Input>
+          <input
+            type="text"
+            onChange={(e) => {
+              this.setState({ query: e.target.value });
+            }}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                search({
+                  accessToken,
+                  refreshToken,
+                  query: this.state.query,
+                  type: 'artist,track,album,playlist',
+                });
+              }
+            }}
+          />
+        </Input>
+      </SearchBox>
+    );
+  }
+}
 
 Search.propTypes = {
   search: PropTypes.func.isRequired,

@@ -2,6 +2,7 @@ import {
   SET_TOKEN,
   FETCH_DEVICE,
   SEARCH,
+  SET_SEARCH_RESULT,
   PLAY,
   FETCH_PLAYLIST,
 } from '../actions/spotify';
@@ -25,6 +26,10 @@ function spotify(state = initialState, action) {
         device: action.payload,
       });
     case SEARCH:
+      return Object.assign({}, state, {
+        searchResult: action.payload,
+      });
+    case SET_SEARCH_RESULT:
       return Object.assign({}, state, {
         searchResult: action.payload,
       });

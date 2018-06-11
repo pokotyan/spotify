@@ -39,11 +39,11 @@ const SearchResult = (props) => {
 
   return (
     <Container>
-      {searchResult.artists &&
+      {searchResult.artists && searchResult.artists.items.length &&
         <Title><div>アーティスト</div></Title>
       }
       <Thumbnails>
-        {searchResult.artists &&
+        {searchResult.artists && searchResult.artists.items.length &&
         searchResult.artists.items.map(item => (
           <ArtistList
             item={item}
@@ -54,11 +54,11 @@ const SearchResult = (props) => {
         ))
       }
       </Thumbnails>
-      {searchResult.albums &&
+      {searchResult.albums && searchResult.albums.items.length &&
         <Title><div>アルバム</div></Title>
       }
       <Thumbnails>
-        {searchResult.albums &&
+        {searchResult.albums && searchResult.albums.items.length &&
           searchResult.albums.items.map(item => (
             <AlbumList
               item={item}
@@ -69,11 +69,11 @@ const SearchResult = (props) => {
           ))
         }
       </Thumbnails>
-      {searchResult.playlists &&
+      {searchResult.playlists && searchResult.playlists.items.length &&
         <Title><div>プレイリスト</div></Title>
       }
       <Thumbnails>
-        {searchResult.playlists &&
+        {searchResult.playlists && searchResult.playlists.items.length &&
         searchResult.playlists.items.map(item => (
           <PlayList
             item={item}

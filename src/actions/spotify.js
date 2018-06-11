@@ -3,6 +3,7 @@ export const FETCH_TOKEN = Symbol('FETCH_TOKEN');
 export const SET_TOKEN = Symbol('SET_TOKEN');
 export const FETCH_DEVICE = Symbol('FETCH_DEVICE');
 export const SEARCH = Symbol('SEARCH');
+export const SET_SEARCH_RESULT = Symbol('SET_SEARCH_RESULT');
 export const PLAY = Symbol('PLAY');
 export const FETCH_PLAYLIST = Symbol('FETCH_PLAYLIST');
 
@@ -28,6 +29,11 @@ export const fetchDevice = value => ({
 
 export const search = value => ({
   type: SEARCH,
+  payload: value,
+});
+
+export const setSearchResult = value => ({
+  type: SET_SEARCH_RESULT,
   payload: value,
 });
 
