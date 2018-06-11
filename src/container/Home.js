@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,50 +7,71 @@ import * as spotifyActions from '../actions/spotify';
 import SideBar from '../components/SideBar';
 import Main from '../components/Main';
 
-const Home = (props) => {
-  const {
-    spotifyActions: {
-      fetchDevice,
-      search,
-      play,
-      fetchPlayList,
-    },
-    spotify: {
-      searchResult,
-      auth,
-    },
-  } = props;
+class Home extends Component {
+  // ブラウザリロード => ssrした際はtokenが吹っ飛ぶので / にリダイレクトさせる。
+  // (ログイン => callbackからHomeに来たときは非同期の遷移なのでここの処理は呼ばれない）
+  static getRedirectUrl(state) {
+    const {
+      spotify: {
+        auth: {
+          accessToken,
+          refreshToken,
+        },
+      },
+    } = state;
 
-  return (
-    <div className="container">
-      <div className="sidebar">
-        {auth.accessToken ?
-          <SideBar
-            fetchDevice={fetchDevice}
-            search={search}
-            accessToken={auth.accessToken}
-            refreshToken={auth.refreshToken}
-          /> :
-          <Dimmer active>
-            <Loader>Loading</Loader>
-          </Dimmer>
-        }
+    if (!accessToken && !refreshToken) {
+      return '/';
+    }
+
+    return null;
+  }
+
+  render() {
+    const {
+      spotifyActions: {
+        fetchDevice,
+        search,
+        play,
+        fetchPlayList,
+      },
+      spotify: {
+        searchResult,
+        auth,
+      },
+    } = this.props;
+
+    return (
+      <div className="container">
+        <div className="sidebar">
+          {auth.accessToken ?
+            <SideBar
+              fetchDevice={fetchDevice}
+              search={search}
+              accessToken={auth.accessToken}
+              refreshToken={auth.refreshToken}
+            /> :
+            <Dimmer active>
+              <Loader>Loading</Loader>
+            </Dimmer>
+          }
+        </div>
+        <div className="main">
+          {Object.keys(searchResult).length &&
+            <Main
+              play={play}
+              fetchPlayList={fetchPlayList}
+              searchResult={searchResult}
+              accessToken={auth.accessToken}
+              refreshToken={auth.refreshToken}
+            />
+          }
+        </div>
+        <div className="footer" />
       </div>
-      <div className="main">
-        {Object.keys(searchResult).length &&
-          <Main
-            play={play}
-            fetchPlayList={fetchPlayList}
-            searchResult={searchResult}
-            accessToken={auth.accessToken}
-            refreshToken={auth.refreshToken}
-          />
-        }
-      </div>
-      <div className="footer" />
-    </div>
-  );
-};
+    );
+  }
+}
 
 Home.propTypes = {
   spotifyActions: PropTypes.shape({
