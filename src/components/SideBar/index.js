@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import GetDevice from '../SpotifyGetDevice';
-import SearchBar from '../SpotifySearchBar';
 
 const Lists = styled.div`
   padding: 20px;
@@ -15,19 +16,21 @@ const Lists = styled.div`
 const SideBar = (props) => {
   const {
     fetchDevice,
-    search,
     accessToken,
     refreshToken,
   } = props;
 
-
   return (
     <Lists>
-      <SearchBar
-        search={search}
-        accessToken={accessToken}
-        refreshToken={refreshToken}
-      />
+      <Link to="/home/search">
+        <Icon
+          className="search-bar-icon"
+          name="search"
+          size="large"
+          color="grey"
+        />
+        検索
+      </Link>
       <GetDevice
         fetchDevice={fetchDevice}
         accessToken={accessToken}
@@ -39,7 +42,6 @@ const SideBar = (props) => {
 
 SideBar.propTypes = {
   fetchDevice: PropTypes.func.isRequired,
-  search: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };

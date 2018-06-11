@@ -1,103 +1,55 @@
-import React from 'react';
+/* eslint react/prefer-stateless-function: off */
+
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import ArtistList from '../ArtistList';
-import AlbumList from '../AlbumList';
-import PlayList from '../PlayList';
+import SearchBox from '../SearchBox';
+import SearchResult from '../SearchResult';
 
-const Container = styled.div`
-  padding: 10px;
-`;
+class Main extends Component {
+  render() {
+    const {
+      url,
+      searchResult,
+      search,
+      play,
+      fetchPlayList,
+      accessToken,
+      refreshToken,
+    } = this.props;
 
-const Title = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 60px;
-
-  div {
-    font-size: 30px;
-    color: white;
-  }
-`;
-
-const Thumbnails = styled.div`
-  display: grid;
-  grid-auto-rows: 250px;
-  grid-template-columns: repeat(auto-fill, 250px);
-  grid-gap: 10px 10px;
-`;
-
-const Main = (props) => {
-  const {
-    searchResult: {
-      albums,
-      playlists,
-      artists,
-    },
-    play,
-    fetchPlayList,
-    accessToken,
-    refreshToken,
-  } = props;
-
-  return (
-    <Container>
-      {artists &&
-        <Title><div>アーティスト</div></Title>
-      }
-      <Thumbnails>
-        {artists &&
-        artists.items.map(item => (
-          <ArtistList
-            item={item}
-            play={play}
+    return (
+      <React.Fragment>
+        {url === '/home/search' ?
+          <SearchBox
+            search={search}
             accessToken={accessToken}
             refreshToken={refreshToken}
           />
-        ))
-      }
-      </Thumbnails>
-      {albums &&
-        <Title><div>アルバム</div></Title>
-      }
-      <Thumbnails>
-        {albums &&
-          albums.items.map(item => (
-            <AlbumList
-              item={item}
-              play={play}
-              accessToken={accessToken}
-              refreshToken={refreshToken}
-            />
-          ))
+          : null
         }
-      </Thumbnails>
-      {playlists &&
-        <Title><div>プレイリスト</div></Title>
-      }
-      <Thumbnails>
-        {playlists &&
-        playlists.items.map(item => (
-          <PlayList
-            item={item}
+        {Object.keys(searchResult).length ?
+          <SearchResult
+            play={play}
             fetchPlayList={fetchPlayList}
+            searchResult={searchResult}
             accessToken={accessToken}
             refreshToken={refreshToken}
           />
-        ))
-      }
-      </Thumbnails>
-    </Container>
-  );
-};
+          : null
+        }
+      </React.Fragment>
+    );
+  }
+}
 
 Main.propTypes = {
+  url: PropTypes.string.isRequired,
   searchResult: PropTypes.shape({
     albums: PropTypes.object,
     playlists: PropTypes.object,
     artists: PropTypes.object,
   }).isRequired,
+  search: PropTypes.func.isRequired,
   play: PropTypes.func.isRequired,
   fetchPlayList: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,

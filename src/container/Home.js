@@ -39,6 +39,9 @@ class Home extends Component {
         searchResult,
         auth,
       },
+      location: {
+        pathname: url,
+      },
     } = this.props;
 
     return (
@@ -57,8 +60,10 @@ class Home extends Component {
           }
         </div>
         <div className="main">
-          {Object.keys(searchResult).length &&
+          {auth.accessToken &&
             <Main
+              url={url}
+              search={search}
               play={play}
               fetchPlayList={fetchPlayList}
               searchResult={searchResult}
@@ -83,6 +88,9 @@ Home.propTypes = {
   spotify: PropTypes.shape({
     searchResult: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
   }).isRequired,
 };
 function mapStateToProps(state) {
