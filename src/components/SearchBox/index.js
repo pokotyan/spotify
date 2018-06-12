@@ -48,6 +48,7 @@ class Search extends Component {
         <Input>
           <input
             type="text"
+            placeholder="入力してください...."
             onChange={(e) => {
               this.setState({ query: e.target.value });
             }}

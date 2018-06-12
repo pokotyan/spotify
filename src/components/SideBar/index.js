@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
 import GetDevice from '../SpotifyGetDevice';
@@ -13,6 +13,15 @@ const Lists = styled.div`
   grid-row-gap: 20px;
 `;
 
+const ActiveLink = styled(NavLink)`
+  &:link, &:visited {
+    color: gray;
+  }
+  &:hover {
+    color: white;
+  }
+`;
+
 const SideBar = (props) => {
   const {
     fetchDevice,
@@ -22,7 +31,13 @@ const SideBar = (props) => {
 
   return (
     <Lists>
-      <Link to="/home/search">
+      <ActiveLink
+        to="/home/search"
+        activeStyle={{
+          fontWeight: 'bold',
+          color: 'green',
+        }}
+      >
         <Icon
           className="search-bar-icon"
           name="search"
@@ -30,7 +45,7 @@ const SideBar = (props) => {
           color="grey"
         />
         検索
-      </Link>
+      </ActiveLink>
       <GetDevice
         fetchDevice={fetchDevice}
         accessToken={accessToken}

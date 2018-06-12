@@ -7,8 +7,8 @@ const ItemList = styled.div`
 `;
 
 const ItemImage = styled.img`
-  width: 250px;
-  height: 250px;
+  width: 177px;
+  height: 177px;
 `;
 
 const AlbumList = (props) => {
@@ -28,7 +28,7 @@ const AlbumList = (props) => {
           <ItemImage
             src={item.images[0].url}
             alt=""
-            onClick={(e) => {
+            onClick={() => {
               play({
                 contextUri: item.uri,
                 accessToken,

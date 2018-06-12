@@ -23,44 +23,39 @@ const Title = styled.div`
 
 const Thumbnails = styled.div`
   display: grid;
-  grid-auto-rows: 250px;
-  grid-template-columns: repeat(auto-fill, 250px);
+  grid-auto-rows: 177px;
+  grid-template-columns: repeat(auto-fill, 177px);
   grid-gap: 10px 10px;
 `;
 
-const SearchResult = (props) => {
-  const {
-    searchResult,
-    play,
-    fetchPlayList,
-    accessToken,
-    refreshToken,
-  } = props;
+class SearchResult extends Component {
+  omitNoImageItem(items) {
+    return items.filter(item => item.images.length);
+  }
 
-  return (
-    <Container>
-      {searchResult.artists && searchResult.artists.items.length &&
-        <Title><div>アーティスト</div></Title>
-      }
-      <Thumbnails>
+  render() {
+    const {
+      searchResult,
+      play,
+      fetchPlayList,
+      accessToken,
+      refreshToken,
+    } = this.props;
+
+    return (
+      <Container>
+        <ul>
+          <li>アーティスト</li>
+          <li>アルバム</li>
+          <li>プレイリスト</li>
+        </ul>
         {searchResult.artists && searchResult.artists.items.length &&
-        searchResult.artists.items.map(item => (
-          <ArtistList
-            item={item}
-            play={play}
-            accessToken={accessToken}
-            refreshToken={refreshToken}
-          />
-        ))
-      }
-      </Thumbnails>
-      {searchResult.albums && searchResult.albums.items.length &&
-        <Title><div>アルバム</div></Title>
-      }
-      <Thumbnails>
-        {searchResult.albums && searchResult.albums.items.length &&
-          searchResult.albums.items.map(item => (
-            <AlbumList
+          <Title><div>アーティスト</div></Title>
+        }
+        <Thumbnails>
+          {searchResult.artists && searchResult.artists.items.length &&
+          this.omitNoImageItem(searchResult.artists.items).map(item => (
+            <ArtistList
               item={item}
               play={play}
               accessToken={accessToken}
@@ -68,25 +63,41 @@ const SearchResult = (props) => {
             />
           ))
         }
-      </Thumbnails>
-      {searchResult.playlists && searchResult.playlists.items.length &&
-        <Title><div>プレイリスト</div></Title>
-      }
-      <Thumbnails>
+        </Thumbnails>
+        {searchResult.albums && searchResult.albums.items.length &&
+          <Title><div>アルバム</div></Title>
+        }
+        <Thumbnails>
+          {searchResult.albums && searchResult.albums.items.length &&
+            this.omitNoImageItem(searchResult.albums.items).map(item => (
+              <AlbumList
+                item={item}
+                play={play}
+                accessToken={accessToken}
+                refreshToken={refreshToken}
+              />
+            ))
+          }
+        </Thumbnails>
         {searchResult.playlists && searchResult.playlists.items.length &&
-        searchResult.playlists.items.map(item => (
-          <PlayList
-            item={item}
-            fetchPlayList={fetchPlayList}
-            accessToken={accessToken}
-            refreshToken={refreshToken}
-          />
-        ))
-      }
-      </Thumbnails>
-    </Container>
-  );
-};
+          <Title><div>プレイリスト</div></Title>
+        }
+        <Thumbnails>
+          {searchResult.playlists && searchResult.playlists.items.length &&
+          this.omitNoImageItem(searchResult.playlists.items).map(item => (
+            <PlayList
+              item={item}
+              fetchPlayList={fetchPlayList}
+              accessToken={accessToken}
+              refreshToken={refreshToken}
+            />
+          ))
+        }
+        </Thumbnails>
+      </Container>
+    );
+  }
+}
 
 SearchResult.propTypes = {
   searchResult: PropTypes.shape({
