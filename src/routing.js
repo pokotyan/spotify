@@ -2,7 +2,6 @@ import Top from './container/Top';
 import CallBack from './container/SpotifyCallBack';
 import Home from './container/Home';
 import About from './container/About';
-import Pokemon from './container/Pokemon';
 import NotFound from './components/NotFound';
 
 const routes = [
@@ -22,10 +21,6 @@ const routes = [
   {
     path: '/about',
     component: About,
-  },
-  {
-    path: '/pokemon',
-    component: Pokemon,
   },
   {
     component: NotFound,
