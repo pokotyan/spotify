@@ -93,7 +93,8 @@ module.exports = {
     tls: 'empty',
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), // webpack-dev-serverを独自のexpressで動かす際にHMRするなら、このプラグイン必要
+    // webpack-dev-serverを独自のexpressで動かす際にHMRするなら、このプラグイン必要
+    new webpack.HotModuleReplacementPlugin(),
   ],
   // ソースマップを有効にする
   devtool: 'source-map',

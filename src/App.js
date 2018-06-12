@@ -11,12 +11,14 @@ const history = createBrowserHistory();
 const store = createStore(history);
 
 const render = () => {
-  // ReactDOM.hydrate使ったら、Warning: Expected server HTML to contain a matching <div> in <div>.というのがdevツールに出た。調べたら以下の対処法があった。
+  // ReactDOM.hydrate使ったら、Warning: Expected server HTML to contain a matching <div> in <div>.
+  // というのがdevツールに出た。調べたら以下の対処法があった。
   // https://github.com/nozzle/react-static/issues/144
   const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
 
   // BrowserRouterにhistoryのpropsを渡したら
-  // Warning: <BrowserRouter> ignores the history prop. To use a custom history, use `import { Router }` instead of `import { BrowserRouter as Router }`."
+  // Warning: <BrowserRouter> ignores the history prop. To use a custom history,
+  // use `import { Router }` instead of `import { BrowserRouter as Router }`."
   // というエラーが出る。代わりにRouterを使うとエラーは出ない
   // 参考：https://stackoverflow.com/questions/48349138/browserrouter-ignores-the-history-prop
   // というか、そもそもBrowserRouterはhistoryを渡す必要がないぽい。内部にhistoryを持ってる

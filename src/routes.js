@@ -5,10 +5,9 @@ import routes from './routing';
 
 const Routes = () => renderRoutes(routes);
 
-export default () => {
-  return (
-    <Switch>
-      <Routes />
-    </Switch>
-  );
-};
+export default () => (
+  <Switch>
+    <Routes />
+  </Switch>
+);
+

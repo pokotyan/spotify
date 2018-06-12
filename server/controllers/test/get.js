@@ -1,15 +1,15 @@
 const db = require('../../models');
 
 module.exports = async (req, res, next) => {
-  let { count } = await db.increments.findOne({
+  const { count } = await db.increments.findOne({
     where: { id: 1 },
     raw: true,
   });
 
   await db.increments.update({
-    count: count + 1
+    count: count + 1,
   }, {
-    where: { id: 1 }
+    where: { id: 1 },
   });
 
   const result = await db.increments.findOne({
@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
   res.send({
     status: 200,
     error: null,
-    data: result
+    data: result,
   });
   next();
 };
