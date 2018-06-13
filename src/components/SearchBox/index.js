@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
 const SearchBox = styled.div`
@@ -33,13 +34,27 @@ const Input = styled.div`
 `;
 
 class Search extends Component {
-  render() {
+  handlePress(e) {
     const {
       search,
       accessToken,
       refreshToken,
+      history,
     } = this.props;
 
+    if (e.key === 'Enter') {
+      search({
+        accessToken,
+        refreshToken,
+        query: this.state.query,
+        type: 'artist,track,album,playlist',
+      });
+
+      history.push('/home/search/result');
+    }
+  }
+
+  render() {
     return (
       <SearchBox>
         <Discription>
@@ -52,16 +67,7 @@ class Search extends Component {
             onChange={(e) => {
               this.setState({ query: e.target.value });
             }}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                search({
-                  accessToken,
-                  refreshToken,
-                  query: this.state.query,
-                  type: 'artist,track,album,playlist',
-                });
-              }
-            }}
+            onKeyPress={::this.handlePress}
           />
         </Input>
       </SearchBox>
@@ -75,4 +81,4 @@ Search.propTypes = {
   refreshToken: PropTypes.string.isRequired,
 };
 
-export default Search;
+export default withRouter(Search);

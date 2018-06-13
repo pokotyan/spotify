@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ItemList = styled.div`
-  list-style-type: none;
+  width: 16.666666667%; /* 100% / 6 */
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 2.5em;
 `;
 
 const ItemImage = styled.img`
-  width: 177px;
-  height: 177px;
+  width: 100%;
+  height: 200px; /* 6つ並んでいる時のwidthを確認してその値をheightに入れた */
+  object-fit: contain;
 `;
 
 const AlbumList = (props) => {

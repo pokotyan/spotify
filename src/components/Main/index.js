@@ -19,7 +19,7 @@ class Main extends Component {
 
     return (
       <React.Fragment>
-        {url === '/home/search' ?
+        {url.includes('/home/search') ?
           <SearchBox
             search={search}
             accessToken={accessToken}
@@ -34,6 +34,7 @@ class Main extends Component {
             searchResult={searchResult}
             accessToken={accessToken}
             refreshToken={refreshToken}
+            url={url}
           />
           : null
         }

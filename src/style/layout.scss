@@ -33,3 +33,7 @@
   grid-column: 1 / 2;
   background-color: #282828;
 }
+
+body ::-webkit-scrollbar {
+  width: 0px;
+}

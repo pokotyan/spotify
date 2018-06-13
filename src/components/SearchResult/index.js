@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ArtistList from '../ArtistList';
@@ -6,6 +7,7 @@ import AlbumList from '../AlbumList';
 import PlayList from '../PlayList';
 
 const Container = styled.div`
+  width: 100%;
   padding: 10px;
 `;
 
@@ -21,16 +23,62 @@ const Title = styled.div`
   }
 `;
 
+const ThumbnailsContainer = styled.div`
+  width: 100%;
+  padding: 28px;
+`;
+
 const Thumbnails = styled.div`
-  display: grid;
-  grid-auto-rows: 177px;
-  grid-template-columns: repeat(auto-fill, 177px);
-  grid-gap: 10px 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+`;
+
+const ActiveLink = styled.ul`
+  width: 100%
+  text-align: center;
+  padding: 20px 0;
+
+  li {
+    display: inline-block;
+
+    a {
+      color: gray;
+      box-sizing: border-box;
+      margin: .8em;
+      padding: .8em .8em 0;
+      letter-spacing: .16em;
+
+      &:hover {
+        color: white;
+      }
+
+      &.active {
+        color: white;
+      }
+    }
+  }
+
+  .activeLink:after {
+    content: "";
+    height: 2px;
+    background-color: #1db954;
+    width: 30px;
+    position: relative;
+    top: 4px;
+    display: block;
+    margin: 0 auto;
+  }
 `;
 
 class SearchResult extends Component {
   omitNoImageItem(items) {
     return items.filter(item => item.images.length);
+  }
+
+  isActive(path) {
+    return this.props.url === path ? 'activeLink' : '';
   }
 
   render() {
@@ -44,33 +92,38 @@ class SearchResult extends Component {
 
     return (
       <Container>
-        <ul>
-          <li>アーティスト</li>
-          <li>アルバム</li>
-          <li>プレイリスト</li>
-        </ul>
+        {(searchResult.artists || searchResult.albums || searchResult.playlists) &&
+          <ActiveLink>
+            <li className={this.isActive('/home/search/artist')}>
+              <NavLink
+                to="/home/search/artist"
+              >アーティスト
+              </NavLink>
+            </li>
+            <li className={this.isActive('/home/search/album')}>
+              <NavLink
+                to="/home/search/album"
+              >
+                アルバム
+              </NavLink>
+            </li>
+            <li className={this.isActive('/home/search/playlist')}>
+              <NavLink
+                to="/home/search/playlist"
+              >
+                プレイリスト
+              </NavLink>
+            </li>
+          </ActiveLink>
+        }
         {searchResult.artists && searchResult.artists.items.length &&
           <Title><div>アーティスト</div></Title>
         }
-        <Thumbnails>
-          {searchResult.artists && searchResult.artists.items.length &&
-          this.omitNoImageItem(searchResult.artists.items).map(item => (
-            <ArtistList
-              item={item}
-              play={play}
-              accessToken={accessToken}
-              refreshToken={refreshToken}
-            />
-          ))
-        }
-        </Thumbnails>
-        {searchResult.albums && searchResult.albums.items.length &&
-          <Title><div>アルバム</div></Title>
-        }
-        <Thumbnails>
-          {searchResult.albums && searchResult.albums.items.length &&
-            this.omitNoImageItem(searchResult.albums.items).map(item => (
-              <AlbumList
+        <ThumbnailsContainer>
+          <Thumbnails>
+            {searchResult.artists && searchResult.artists.items.length &&
+            this.omitNoImageItem(searchResult.artists.items).map(item => (
+              <ArtistList
                 item={item}
                 play={play}
                 accessToken={accessToken}
@@ -78,22 +131,42 @@ class SearchResult extends Component {
               />
             ))
           }
-        </Thumbnails>
+          </Thumbnails>
+        </ThumbnailsContainer>
+        {searchResult.albums && searchResult.albums.items.length &&
+          <Title><div>アルバム</div></Title>
+        }
+        <ThumbnailsContainer>
+          <Thumbnails>
+            {searchResult.albums && searchResult.albums.items.length &&
+              this.omitNoImageItem(searchResult.albums.items).map(item => (
+                <AlbumList
+                  item={item}
+                  play={play}
+                  accessToken={accessToken}
+                  refreshToken={refreshToken}
+                />
+              ))
+            }
+          </Thumbnails>
+        </ThumbnailsContainer>
         {searchResult.playlists && searchResult.playlists.items.length &&
           <Title><div>プレイリスト</div></Title>
         }
-        <Thumbnails>
-          {searchResult.playlists && searchResult.playlists.items.length &&
-          this.omitNoImageItem(searchResult.playlists.items).map(item => (
-            <PlayList
-              item={item}
-              fetchPlayList={fetchPlayList}
-              accessToken={accessToken}
-              refreshToken={refreshToken}
-            />
-          ))
-        }
-        </Thumbnails>
+        <ThumbnailsContainer>
+          <Thumbnails>
+            {searchResult.playlists && searchResult.playlists.items.length &&
+            this.omitNoImageItem(searchResult.playlists.items).map(item => (
+              <PlayList
+                item={item}
+                fetchPlayList={fetchPlayList}
+                accessToken={accessToken}
+                refreshToken={refreshToken}
+              />
+            ))
+          }
+          </Thumbnails>
+        </ThumbnailsContainer>
       </Container>
     );
   }
@@ -109,6 +182,7 @@ SearchResult.propTypes = {
   fetchPlayList: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 export default SearchResult;
