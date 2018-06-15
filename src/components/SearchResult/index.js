@@ -123,56 +123,56 @@ class SearchResult extends Component {
           </Links>
         }
         {searchResult.artists && searchResult.artists.items.length &&
-          <Title><div>アーティスト</div></Title>
+          <React.Fragment>
+            <Title><div>アーティスト</div></Title>
+            <ThumbnailsContainer>
+              <Thumbnails>
+                {this.omitNoImageItem(searchResult.artists.items).map(item => (
+                  <ArtistList
+                    item={item}
+                    play={play}
+                    accessToken={accessToken}
+                    refreshToken={refreshToken}
+                  />
+                  ))}
+              </Thumbnails>
+            </ThumbnailsContainer>
+          </React.Fragment>
         }
-        <ThumbnailsContainer>
-          <Thumbnails>
-            {searchResult.artists && searchResult.artists.items.length &&
-            this.omitNoImageItem(searchResult.artists.items).map(item => (
-              <ArtistList
-                item={item}
-                play={play}
-                accessToken={accessToken}
-                refreshToken={refreshToken}
-              />
-            ))
-          }
-          </Thumbnails>
-        </ThumbnailsContainer>
         {searchResult.albums && searchResult.albums.items.length &&
-          <Title><div>アルバム</div></Title>
+          <React.Fragment>
+            <Title><div>アルバム</div></Title>
+            <ThumbnailsContainer>
+              <Thumbnails>
+                {this.omitNoImageItem(searchResult.albums.items).map(item => (
+                  <AlbumList
+                    item={item}
+                    play={play}
+                    accessToken={accessToken}
+                    refreshToken={refreshToken}
+                  />
+                ))}
+              </Thumbnails>
+            </ThumbnailsContainer>
+          </React.Fragment>
         }
-        <ThumbnailsContainer>
-          <Thumbnails>
-            {searchResult.albums && searchResult.albums.items.length &&
-              this.omitNoImageItem(searchResult.albums.items).map(item => (
-                <AlbumList
-                  item={item}
-                  play={play}
-                  accessToken={accessToken}
-                  refreshToken={refreshToken}
-                />
-              ))
-            }
-          </Thumbnails>
-        </ThumbnailsContainer>
         {searchResult.playlists && searchResult.playlists.items.length &&
-          <Title><div>プレイリスト</div></Title>
+          <React.Fragment>
+            <Title><div>プレイリスト</div></Title>
+            <ThumbnailsContainer>
+              <Thumbnails>
+                {this.omitNoImageItem(searchResult.playlists.items).map(item => (
+                  <PlayList
+                    item={item}
+                    fetchPlayList={fetchPlayList}
+                    accessToken={accessToken}
+                    refreshToken={refreshToken}
+                  />
+                ))}
+              </Thumbnails>
+            </ThumbnailsContainer>
+          </React.Fragment>
         }
-        <ThumbnailsContainer>
-          <Thumbnails>
-            {searchResult.playlists && searchResult.playlists.items.length &&
-            this.omitNoImageItem(searchResult.playlists.items).map(item => (
-              <PlayList
-                item={item}
-                fetchPlayList={fetchPlayList}
-                accessToken={accessToken}
-                refreshToken={refreshToken}
-              />
-            ))
-          }
-          </Thumbnails>
-        </ThumbnailsContainer>
       </Container>
     );
   }
