@@ -20,6 +20,12 @@ const ActiveLink = styled(NavLink)`
   &:hover {
     color: white;
   }
+
+  span {
+    @media screen and (max-width: 750px) {
+      display: none;
+    }
+  }
 `;
 
 const SideBar = (props) => {
@@ -44,13 +50,13 @@ const SideBar = (props) => {
           size="large"
           color="grey"
         />
-        検索
+        <span>検索</span>
       </ActiveLink>
-      <GetDevice
+      {/* <GetDevice
         fetchDevice={fetchDevice}
         accessToken={accessToken}
         refreshToken={refreshToken}
-      />
+      /> */}
     </Lists>
   );
 };

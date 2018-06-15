@@ -35,13 +35,19 @@ const Thumbnails = styled.div`
   justify-content: flex-start;
 `;
 
-const ActiveLink = styled.ul`
+const Links = styled.ul`
   width: 100%
   text-align: center;
   padding: 20px 0;
 
   li {
     display: inline-block;
+
+    @media screen and (max-width: 500px) {
+      display: block;
+      width: 100%;
+      padding-bottom: 1rem;  
+    }
 
     a {
       color: gray;
@@ -93,7 +99,7 @@ class SearchResult extends Component {
     return (
       <Container>
         {(searchResult.artists || searchResult.albums || searchResult.playlists) &&
-          <ActiveLink>
+          <Links>
             <li className={this.isActive('/home/search/artist')}>
               <NavLink
                 to="/home/search/artist"
@@ -114,7 +120,7 @@ class SearchResult extends Component {
                 プレイリスト
               </NavLink>
             </li>
-          </ActiveLink>
+          </Links>
         }
         {searchResult.artists && searchResult.artists.items.length &&
           <Title><div>アーティスト</div></Title>

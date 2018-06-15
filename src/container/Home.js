@@ -46,17 +46,19 @@ class Home extends Component {
 
     return (
       <div className="container">
+        {!auth.accessToken &&
+          <Dimmer active>
+            <Loader>Loading</Loader>
+          </Dimmer>
+        }
         <div className="sidebar">
-          {auth.accessToken ?
+          {auth.accessToken &&
             <SideBar
               fetchDevice={fetchDevice}
               search={search}
               accessToken={auth.accessToken}
               refreshToken={auth.refreshToken}
-            /> :
-            <Dimmer active>
-              <Loader>Loading</Loader>
-            </Dimmer>
+            />
           }
         </div>
         <div className="main">

@@ -7,12 +7,32 @@ const ItemList = styled.div`
   padding-left: 8px;
   padding-right: 8px;
   padding-bottom: 2.5em;
+
+  @media screen and (max-width: 1300px) {
+    width: 20%; /* 100% / 5 */
+
+    @media screen and (max-width: 1000px) {
+      width: 25%; /* 100% / 4 */
+
+      @media screen and (max-width: 750px) {
+        width: 33%; /* 100% / 3 */
+
+        @media screen and (max-width: 600px) {
+          width: 50%; /* 100% / 2 */
+          
+          @media screen and (max-width: 450px) {
+            width: 100%; /* 100% / 2 */
+          }
+        }
+      }
+    }
+  }
 `;
 
 const ItemImage = styled.img`
   width: 100%;
   height: 200px; /* 6つ並んでいる時のwidthを確認してその値をheightに入れた */
-  object-fit: contain;
+  object-fit: cover;
 `;
 
 const PlayList = (props) => {
@@ -27,21 +47,19 @@ const PlayList = (props) => {
     <ItemList
       key={item.id}
     >
-      <div>
-        { item.images[0] &&
-          <ItemImage
-            src={item.images[0].url}
-            alt=""
-            onClick={() => {
-              fetchPlayList({
-                contextUri: item.tracks.href,
-                accessToken,
-                refreshToken,
-              });
-            }}
-          />
-        }
-      </div>
+      { item.images[0] &&
+        <ItemImage
+          src={item.images[0].url}
+          alt=""
+          onClick={() => {
+            fetchPlayList({
+              contextUri: item.tracks.href,
+              accessToken,
+              refreshToken,
+            });
+          }}
+        />
+      }
     </ItemList>
   );
 };

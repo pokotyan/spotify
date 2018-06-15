@@ -10,9 +10,16 @@ const SearchBox = styled.div`
   background-color: gray;
 `;
 
-const Discription = styled.h4`
+const Discription = styled.div`
   height: 30%;
-  color: #fff;
+
+  h4 {
+    color: #fff;
+  }
+
+  @media screen and (max-width: 450px) {
+    text-align: center;
+  }
 `;
 
 const Input = styled.div`
@@ -30,6 +37,10 @@ const Input = styled.div`
     background-color: transparent;
     border: none;
     outline: 0;
+
+    @media screen and (max-width: 450px) {
+      font-size: 36px;
+    }
   }
 `;
 
@@ -58,7 +69,7 @@ class Search extends Component {
     return (
       <SearchBox>
         <Discription>
-          アーティスト、ソング、アルバムまたはプレイリストで検索
+          <h4>アーティスト、ソング、アルバムまたはプレイリストで検索</h4>
         </Discription>
         <Input>
           <input
