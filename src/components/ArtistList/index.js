@@ -64,7 +64,7 @@ const ArtistList = (props) => {
       { item.images[0] &&
         <Item
           onClick={() => {
-            history.push(`/home/search/result/artist/${item.id}`);
+            history.push(`/home/artist/${item.id}`);
           }}
         >
           <img

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Route } from 'react-router-dom';
 import { Dimmer, Loader } from 'semantic-ui-react';
 import * as spotifyActions from '../actions/spotify';
 import SideBar from '../components/SideBar';
-import Main from '../components/Main';
+import Search from '../components/Search';
+import ArtistDetail from '../components/ArtistDetail';
 
 class Home extends Component {
   // ブラウザリロード => ssrした際はtokenが吹っ飛ぶので / にリダイレクトさせる。
@@ -62,17 +64,33 @@ class Home extends Component {
           }
         </div>
         <div className="main">
-          {auth.accessToken &&
-            <Main
-              url={url}
-              search={search}
-              play={play}
-              fetchPlayList={fetchPlayList}
-              searchResult={searchResult}
-              accessToken={auth.accessToken}
-              refreshToken={auth.refreshToken}
-            />
-          }
+          <Route
+            path="/home/search"
+            render={() => (
+              auth.accessToken &&
+                <Search
+                  url={url}
+                  searchResult={searchResult}
+                  search={search}
+                  play={play}
+                  fetchPlayList={fetchPlayList}
+                  accessToken={auth.accessToken}
+                  refreshToken={auth.refreshToken}
+                />
+            )}
+          />
+          <Route
+            path="/home/artist/:artistId"
+            render={() => (
+              auth.accessToken &&
+                <ArtistDetail
+                  search={search}
+                  searchResult={searchResult}
+                  accessToken={auth.accessToken}
+                  refreshToken={auth.refreshToken}
+                />
+            )}
+          />
         </div>
         <div className="footer" />
       </div>
