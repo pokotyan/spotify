@@ -107,16 +107,16 @@ class SearchResult extends Component {
               >ALL
               </NavLink>
             </li>
-            <li className={this.isActive('/home/search/track')}>
-              <NavLink
-                to="/home/search/track"
-              >曲
-              </NavLink>
-            </li>
             <li className={this.isActive('/home/search/artist')}>
               <NavLink
                 to="/home/search/artist"
               >アーティスト
+              </NavLink>
+            </li>
+            <li className={this.isActive('/home/search/track')}>
+              <NavLink
+                to="/home/search/track"
+              >曲
               </NavLink>
             </li>
             <li className={this.isActive('/home/search/album')}>

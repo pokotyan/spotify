@@ -3,7 +3,18 @@ import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import styled from 'styled-components';
+import logo from '../../assets/images/logo.png';
 import GetDevice from '../SpotifyGetDevice';
+
+const Logo = styled.div`
+  margin-top: 20px;
+  margin-left: 20px;
+  width: 32px;
+  height: 32px;
+  background-repeat: no-repeat;
+  background-image: url(${logo});
+  background-size: contain;
+`;
 
 const Lists = styled.div`
   padding: 20px;
@@ -36,28 +47,31 @@ const SideBar = (props) => {
   } = props;
 
   return (
-    <Lists>
-      <ActiveLink
-        to="/home/search"
-        activeStyle={{
-          fontWeight: 'bold',
-          color: 'green',
-        }}
-      >
-        <Icon
-          className="search-bar-icon"
-          name="search"
-          size="large"
-          color="grey"
-        />
-        <span>検索</span>
-      </ActiveLink>
-      {/* <GetDevice
-        fetchDevice={fetchDevice}
-        accessToken={accessToken}
-        refreshToken={refreshToken}
-      /> */}
-    </Lists>
+    <React.Fragment>
+      <Logo />
+      <Lists>
+        <ActiveLink
+          to="/home/search"
+          activeStyle={{
+            fontWeight: 'bold',
+            color: 'green',
+          }}
+        >
+          <Icon
+            className="search-bar-icon"
+            name="search"
+            size="large"
+            color="grey"
+          />
+          <span>検索</span>
+        </ActiveLink>
+        {/* <GetDevice
+          fetchDevice={fetchDevice}
+          accessToken={accessToken}
+          refreshToken={refreshToken}
+        /> */}
+      </Lists>
+    </React.Fragment>
   );
 };
 
