@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 
 const ItemList = styled.div`
   width: 16.666666667%; /* 100% / 6 */
@@ -51,9 +52,9 @@ const Item = styled.div`
 const ArtistList = (props) => {
   const {
     item,
-    play,
     accessToken,
     refreshToken,
+    history,
   } = props;
 
   return (
@@ -63,11 +64,7 @@ const ArtistList = (props) => {
       { item.images[0] &&
         <Item
           onClick={() => {
-            play({
-              contextUri: item.uri,
-              accessToken,
-              refreshToken,
-            });
+            history.push(`/home/search/result/artist/${item.id}`);
           }}
         >
           <img
@@ -88,9 +85,8 @@ ArtistList.propTypes = {
     name: PropTypes.string.isRequired,
     uri: PropTypes.string.isRequired,
   }).isRequired,
-  play: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,
   refreshToken: PropTypes.string.isRequired,
 };
 
-export default ArtistList;
+export default withRouter(ArtistList);

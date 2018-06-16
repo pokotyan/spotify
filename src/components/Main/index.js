@@ -2,8 +2,9 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import SearchBox from '../SearchBox';
-import SearchResult from '../SearchResult';
+import { Route } from 'react-router-dom';
+import Search from '../Search';
+import ArtistDetail from '../ArtistDetail';
 
 class Main extends Component {
   render() {
@@ -19,25 +20,31 @@ class Main extends Component {
 
     return (
       <React.Fragment>
-        {url.includes('/home/search') ?
-          <SearchBox
-            search={search}
-            accessToken={accessToken}
-            refreshToken={refreshToken}
-          />
-          : null
-        }
-        {Object.keys(searchResult).length ?
-          <SearchResult
-            play={play}
-            fetchPlayList={fetchPlayList}
-            searchResult={searchResult}
-            accessToken={accessToken}
-            refreshToken={refreshToken}
-            url={url}
-          />
-          : null
-        }
+        <Route
+          path="/home/search"
+          render={() => (
+            <Search
+              url={url}
+              searchResult={searchResult}
+              search={search}
+              play={play}
+              fetchPlayList={fetchPlayList}
+              accessToken={accessToken}
+              refreshToken={refreshToken}
+            />
+          )}
+        />
+        <Route
+          path="/home/search/result/artist/:artistId"
+          render={() => (
+            <ArtistDetail
+              search={search}
+              searchResult={searchResult}
+              accessToken={accessToken}
+              refreshToken={refreshToken}
+            />
+          )}
+        />
       </React.Fragment>
     );
   }
