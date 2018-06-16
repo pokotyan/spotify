@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ArtistList from '../ArtistList';
+import TrackList from '../TrackList';
 import AlbumList from '../AlbumList';
 import PlayList from '../PlayList';
 
@@ -100,6 +101,18 @@ class SearchResult extends Component {
       <Container>
         {(searchResult.artists || searchResult.albums || searchResult.playlists) &&
           <Links>
+            <li className={this.isActive('/home/search/result')}>
+              <NavLink
+                to="/home/search/result"
+              >ALL
+              </NavLink>
+            </li>
+            <li className={this.isActive('/home/search/track')}>
+              <NavLink
+                to="/home/search/track"
+              >曲
+              </NavLink>
+            </li>
             <li className={this.isActive('/home/search/artist')}>
               <NavLink
                 to="/home/search/artist"
@@ -129,6 +142,23 @@ class SearchResult extends Component {
               <Thumbnails>
                 {this.omitNoImageItem(searchResult.artists.items).map(item => (
                   <ArtistList
+                    item={item}
+                    play={play}
+                    accessToken={accessToken}
+                    refreshToken={refreshToken}
+                  />
+                  ))}
+              </Thumbnails>
+            </ThumbnailsContainer>
+          </React.Fragment>
+        }
+        {searchResult.tracks && searchResult.tracks.items.length &&
+          <React.Fragment>
+            <Title><div>曲</div></Title>
+            <ThumbnailsContainer>
+              <Thumbnails>
+                {searchResult.tracks.items.map(item => (
+                  <TrackList
                     item={item}
                     play={play}
                     accessToken={accessToken}
