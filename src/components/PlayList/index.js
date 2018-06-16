@@ -29,10 +29,32 @@ const ItemList = styled.div`
   }
 `;
 
-const ItemImage = styled.img`
-  width: 100%;
-  height: 200px; /* 6つ並んでいる時のwidthを確認してその値をheightに入れた */
-  object-fit: cover;
+const Item = styled.div`
+  img {
+    width: 100%;
+    height: 200px; /* 6つ並んでいる時のwidthを確認してその値をheightに入れた */
+    object-fit: cover;
+  }
+
+  div {
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    text-align: center;
+    line-height: 1.5;    
+  }
+`;
+
+const ItemName = styled.div`
+  margin: 12px 0 4px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  color: white;
+`;
+
+const OwnerName = styled.div`
+  white-space: nowrap;
+  color: gray;
 `;
 
 const PlayList = (props) => {
@@ -48,7 +70,7 @@ const PlayList = (props) => {
       key={item.id}
     >
       { item.images[0] &&
-        <ItemImage
+        <Item
           src={item.images[0].url}
           alt=""
           onClick={() => {
@@ -58,7 +80,14 @@ const PlayList = (props) => {
               refreshToken,
             });
           }}
-        />
+        >
+          <img
+            alt=""
+            src={item.images[0].url}
+          />
+          <ItemName>{item.name}</ItemName>
+          <OwnerName>{item.owner.display_name || item.owner.id}</OwnerName>
+        </Item>
       }
     </ItemList>
   );
@@ -68,7 +97,9 @@ PlayList.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     images: PropTypes.array.isRequired,
+    name: PropTypes.string.isRequired,
     tracks: PropTypes.object.isRequired,
+    owner: PropTypes.object.isRequired,
   }).isRequired,
   fetchPlayList: PropTypes.func.isRequired,
   accessToken: PropTypes.string.isRequired,

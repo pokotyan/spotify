@@ -29,10 +29,23 @@ const ItemList = styled.div`
   }
 `;
 
-const ItemImage = styled.img`
-  width: 100%;
-  height: 200px; /* 6つ並んでいる時のwidthを確認してその値をheightに入れた */
-  object-fit: cover;
+const Item = styled.div`
+  img {
+    width: 100%;
+    height: 200px; /* 6つ並んでいる時のwidthを確認してその値をheightに入れた */
+    object-fit: cover;
+  }
+
+  div {
+    margin: 12px 0 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-align: center;
+    color: white;
+  }
 `;
 
 const ArtistList = (props) => {
@@ -48,8 +61,7 @@ const ArtistList = (props) => {
       key={item.id}
     >
       { item.images[0] &&
-        <ItemImage
-          src={item.images[0].url}
+        <Item
           onClick={() => {
             play({
               contextUri: item.uri,
@@ -57,7 +69,13 @@ const ArtistList = (props) => {
               refreshToken,
             });
           }}
-        />
+        >
+          <img
+            alt=""
+            src={item.images[0].url}
+          />
+          <div>{item.name}</div>
+        </Item>
       }
     </ItemList>
   );
@@ -67,6 +85,7 @@ ArtistList.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     images: PropTypes.array.isRequired,
+    name: PropTypes.string.isRequired,
     uri: PropTypes.string.isRequired,
   }).isRequired,
   play: PropTypes.func.isRequired,
