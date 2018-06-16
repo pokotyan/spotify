@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import favicon from 'serve-favicon';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -41,6 +42,9 @@ if (process.env.NODE_ENV !== 'production') {
 
 // Serve static files
 app.use(express.static(path.resolve(__dirname, 'build')));
+
+// favicon
+app.use(favicon(path.join('build', 'public', 'favicon.ico')));
 
 // SSRをするミドルウェアを登録
 app.get('*', (req, res) => {

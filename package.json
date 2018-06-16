@@ -86,6 +86,7 @@
     "semantic-ui-react": "^0.80.0",
     "sequelize": "^4.33.3",
     "sequelize-cli": "^3.2.0",
+    "serve-favicon": "^2.5.0",
     "styled-components": "^3.3.2"
   }
 }
