@@ -83,6 +83,17 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff2?|ttf|eot)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
+      },
     ],
   },
   // requestやrequest-promise使う際に必要な設定 https://github.com/request/request/issues/1529

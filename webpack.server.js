@@ -20,6 +20,13 @@ module.exports = {
         loader: 'babel-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff2?|ttf|eot)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 10000,
+        },
+      },
     ],
   },
   resolve: {
