@@ -8,7 +8,7 @@ const SearchBox = styled.div`
   width: 100%;
   height: 150px;
   padding: 20px;
-  background-color: gray;
+  background-color: #282828;;
 `;
 
 const Discription = styled.div`

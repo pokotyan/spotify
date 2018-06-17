@@ -11,6 +11,8 @@ const Header = styled.div`
   background-image: url(${props => props.image});
   background-size: cover;
   background-position: 50%;
+  position: relative;
+  text-align: center;
 
   ::before {
     content: "";
@@ -20,6 +22,14 @@ const Header = styled.div`
     left: 0;
     bottom: 0;
     background: linear-gradient(transparent -30%,#181818);
+  }
+
+  h1 {
+    line-height: 60vh;
+    font-size: 72px;
+    letter-spacing: -.005em;
+    font-weight: 600;
+    color: #fff;
   }
 `;
 
@@ -40,9 +50,9 @@ const ArtistDetail = (props) => {
 
   return (
     <React.Fragment>
-      <Header
-        image={artist.images[0].url}
-      />
+      <Header image={artist.images[0].url}>
+        <h1>{artist.name}</h1>
+      </Header>
     </React.Fragment>
   );
 };
