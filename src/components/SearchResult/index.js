@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Dimmer, Loader } from 'semantic-ui-react';
 import ArtistList from '../ArtistList';
 import TrackList from '../TrackList';
 import AlbumList from '../AlbumList';
@@ -99,6 +100,11 @@ class SearchResult extends Component {
 
     return (
       <Container>
+        {(!searchResult.artists || !searchResult.albums || !searchResult.playlists) &&
+          <Dimmer active>
+            <Loader>Loading</Loader>
+          </Dimmer>
+        }
         {(searchResult.artists || searchResult.albums || searchResult.playlists) &&
           <Links>
             <li className={this.isActive('/home/search/result')}>
