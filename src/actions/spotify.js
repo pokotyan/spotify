@@ -6,6 +6,7 @@ export const SEARCH = Symbol('SEARCH');
 export const SET_SEARCH_RESULT = Symbol('SET_SEARCH_RESULT');
 export const PLAY = Symbol('PLAY');
 export const FETCH_PLAYLIST = Symbol('FETCH_PLAYLIST');
+export const FETCH_ARTIST = Symbol('FETCH_ARTIST');
 
 export const auth = value => ({
   type: AUTH,
@@ -44,5 +45,10 @@ export const play = value => ({
 
 export const fetchPlayList = value => ({
   type: FETCH_PLAYLIST,
+  payload: value,
+});
+
+export const fetchArtist = value => ({
+  type: FETCH_ARTIST,
   payload: value,
 });

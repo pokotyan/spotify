@@ -5,6 +5,7 @@ import {
   SET_SEARCH_RESULT,
   PLAY,
   FETCH_PLAYLIST,
+  FETCH_ARTIST,
 } from '../actions/spotify';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   searchResult: {},
   play: {},
   playlist: {},
+  artistInfo: {},
 };
 
 function spotify(state = initialState, action) {
@@ -40,6 +42,10 @@ function spotify(state = initialState, action) {
     case FETCH_PLAYLIST:
       return Object.assign({}, state, {
         playlist: action.payload,
+      });
+    case FETCH_ARTIST:
+      return Object.assign({}, state, {
+        artistInfo: action.payload,
       });
 
     default:

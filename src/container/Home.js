@@ -36,8 +36,10 @@ class Home extends Component {
         search,
         play,
         fetchPlayList,
+        fetchArtist,
       },
       spotify: {
+        artistInfo,
         searchResult,
         auth,
       },
@@ -84,7 +86,8 @@ class Home extends Component {
             render={() => (
               auth.accessToken &&
                 <ArtistDetail
-                  search={search}
+                  artistInfo={artistInfo}
+                  fetchArtist={fetchArtist}
                   searchResult={searchResult}
                   accessToken={auth.accessToken}
                   refreshToken={auth.refreshToken}
@@ -104,8 +107,10 @@ Home.propTypes = {
     search: PropTypes.func.isRequired,
     play: PropTypes.func.isRequired,
     fetchPlayList: PropTypes.func.isRequired,
+    fetchArtist: PropTypes.func.isRequired,
   }).isRequired,
   spotify: PropTypes.shape({
+    artistInfo: PropTypes.object.isRequired,
     searchResult: PropTypes.object.isRequired,
     auth: PropTypes.object.isRequired,
   }).isRequired,

@@ -176,6 +176,39 @@ function* fetchPlayList() {
   }
 }
 
+function* fetchArtist() {
+  for (;;) {
+    const action = yield take(spotifyActions.FETCH_ARTIST);
+    const {
+      accessToken,
+      refreshToken,
+      artistId,
+    } = action.payload;
+
+    const {
+      response,
+      latestToken,
+    } = yield rp({
+      method: 'POST',
+      uri: 'http://localhost:9000/api/artist',
+      form: {
+        accessToken,
+        refreshToken,
+        artistId,
+      },
+      json: true,
+    });
+
+    // store内のトークンの最新化
+    yield put(spotifyActions.setToken({
+      accessToken: latestToken.accessToken,
+      refreshToken: latestToken.refreshToken,
+    }));
+
+    yield put(spotifyActions.fetchArtist(response));
+  }
+}
+
 export default function* rootSaga() {
   yield all([
     fork(auth),
@@ -184,5 +217,6 @@ export default function* rootSaga() {
     fork(search),
     fork(play),
     fork(fetchPlayList),
+    fork(fetchArtist),
   ]);
 }
